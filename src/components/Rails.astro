@@ -1,0 +1,25 @@
+---
+/** The two double vertical rails that run down every section (x 355 and 1065 at 1440). */
+interface Props { only?: 'left' | 'right' }
+const { only } = Astro.props;
+---
+<div class="rails" aria-hidden="true">
+  {only !== 'right' && <span class="rail" style="grid-column:3" />}
+  {only !== 'left' && <span class="rail" style="grid-column:5" />}
+</div>
+
+<style>
+  .rails {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: var(--cols);
+    grid-template-rows: 100%;
+    pointer-events: none;
+  }
+  .rail {
+    grid-row: 1;
+    border-left: 0.5px solid var(--rail);
+    border-right: 0.5px solid var(--rail);
+  }
+</style>

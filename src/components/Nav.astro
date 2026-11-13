@@ -1,0 +1,124 @@
+---
+/** Top bar: logo · page label + coordinates (centre column) · menu. Opens a full-screen menu. */
+interface Props { label?: string; coords?: string }
+const { label = 'FIELD OFFICE 001', coords = '78°13′N • 15°38′E' } = Astro.props;
+const links = [
+  { href: '/', text: 'Home' },
+  { href: '/about', text: 'About' },
+  { href: '/services', text: 'Services' },
+  { href: '/expeditions', text: 'Expeditions' },
+  { href: '/contact', text: 'Contact' },
+];
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="nav">
+  <a href="/" class="logo" aria-label="STRATA, home">STRATA</a>
+  <div class="meta mono">
+    <p>{label}</p>
+    <p>{coords}</p>
+  </div>
+  <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="menu" id="site-menu" hidden>
+  <nav aria-label="Main">
+    <ul>
+      {links.map((l, i) => (
+        <li>
+          <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>
+            <span class="num mono">{String(i + 1).padStart(2, '0')}</span>
+            <span class="txt">{l.text}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <div class="menu-foot mono">
+    <a href="mailto:contact@strata.studio">contact@strata.studio</a>
+    <p>FIELD SEASON 2026</p>
+  </div>
+</div>
+
+<style>
+  .nav {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: var(--cols);
+    padding-top: 40px;
+    color: var(--white);
+  }
+  .logo {
+    grid-column: 2;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    font-variation-settings: 'SOFT' 0, 'WONK' 0;
+    align-self: start;
+  }
+  .meta { grid-column: 4; display: flex; justify-content: space-between; white-space: nowrap; line-height: normal; }
+  .meta p { text-box: trim-both cap alphabetic; }
+  .menu-btn {
+    grid-column: 6;
+    justify-self: end;
+    width: 56px;
+    height: 9px;
+    margin-top: 1px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; z-index: 60;
+  }
+  .menu-btn span { display: block; height: 2px; width: 100%; background: var(--white); transition: transform .4s cubic-bezier(.7,0,.2,1); }
+  :global(html.menu-open) .menu-btn span:first-child { transform: translateY(3.5px) rotate(12deg); }
+  :global(html.menu-open) .menu-btn span:last-child { transform: translateY(-3.5px) rotate(-12deg); }
+
+  .menu {
+    position: fixed; inset: 0; z-index: 55;
+    background: var(--dark);
+    display: grid;
+    grid-template-columns: var(--cols);
+    grid-template-rows: 1fr auto;
+    padding: 160px 0 40px;
+  }
+  .menu[hidden] { display: none; }
+  .menu nav { grid-column: 4 / 7; }
+  .menu li { border-top: 0.5px solid rgba(255,255,255,.25); }
+  .menu li:last-child { border-bottom: 0.5px solid rgba(255,255,255,.25); }
+  .menu li a { display: flex; align-items: baseline; gap: 40px; padding: 18px 0; }
+  .menu .num { font-size: 14px; color: var(--white-70); width: 40px; }
+  .menu .txt { font-weight: 300; font-size: 72px; line-height: 0.9; letter-spacing: -0.04em; }
+  .menu li a:hover .txt, .menu li a[aria-current] .txt { font-family: var(--serif); font-style: italic; font-variation-settings: 'SOFT' 0, 'WONK' 1; }
+  .menu-foot { grid-column: 2 / 7; display: flex; justify-content: space-between; align-self: end; }
+
+  @media (max-width: 1023.98px) {
+    .nav { padding-top: 28px; }
+    .menu { padding-top: 120px; }
+    .menu nav { grid-column: 2 / 7; }
+    .menu li a { gap: 20px; padding: 16px 0; }
+    .menu .txt { font-size: clamp(40px, 6vw + 16px, 64px); }
+  }
+  @media (max-width: 809.98px) {
+    .meta { display: none; }
+    .menu-btn { width: 40px; }
+    .menu-foot { flex-direction: column; gap: 12px; }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('site-menu');
+  const set = (open: boolean) => {
+    if (!btn || !menu) return;
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.documentElement.classList.toggle('menu-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  btn?.addEventListener('click', () => set(menu?.hidden ?? false));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

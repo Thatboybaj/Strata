@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+interface Props { title?: string; description?: string; navLabel?: string; navCoords?: string; footer?: boolean }
+const {
+  title = 'STRATA — Architecture for the places that shape us',
+  description = 'STRATA is an architecture studio that begins every commission as an expedition — designing for polar coasts, deserts, volcanic plateaus, rainforests and alpine sites.',
+  navLabel, navCoords, footer = true,
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="theme-color" content="#1e1e1c" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      (function () {
+        var r = document.documentElement;
+        function fit() { var w = r.clientWidth || innerWidth; r.style.setProperty('--fit', w >= 1024 && w < 1440 ? String(w / 1440) : '1'); }
+        fit(); addEventListener('resize', fit);
+      })();
+    </script>
+  </head>
+  <body>
+    <Nav label={navLabel} coords={navCoords} />
+    <main>
+      <slot />
+    </main>
+    {footer && <Footer />}
+  </body>
+</html>

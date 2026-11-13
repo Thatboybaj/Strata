@@ -1,0 +1,15 @@
+---
+/** Field-log entry: title + mono notes (one line per array item). */
+interface Props { title: string; lines: string[]; class?: string; style?: string }
+const { title, lines, class: cls = '', style } = Astro.props;
+---
+<div class:list={['log', cls]} style={style}>
+  <p class="label">{title}</p>
+  <p class="mono-sm justify">
+    {lines.map((l, i) => <>{l}{i < lines.length - 1 && <br />}</>)}
+  </p>
+</div>
+
+<style>
+  .log { display: flex; flex-direction: column; gap: 20px; }
+</style>

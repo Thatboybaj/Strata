@@ -1,0 +1,315 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Rails from '../components/Rails.astro';
+import CircleButton from '../components/CircleButton.astro';
+import FieldLog from '../components/FieldLog.astro';
+import ChapterHeading from '../components/ChapterHeading.astro';
+
+import heroSky from '../assets/images/hero-sky.webp';
+import heroValley from '../assets/images/hero-valley.webp';
+import heroRidge from '../assets/images/hero-ridge.webp';
+import fieldSeason from '../assets/images/ch1-field-season.jpg';
+import quoteTerrain from '../assets/images/quote-terrain.webp';
+import ch2Mountain from '../assets/images/ch2-mountain.webp';
+import ch3Polar from '../assets/images/ch3-polar.jpg';
+import ch3Volcanic from '../assets/images/ch3-volcanic.jpg';
+import ch4Maps from '../assets/images/ch4-quiet-maps.jpg';
+import ch4Ridge from '../assets/images/ch4-ridge.webp';
+import ch6Leave from '../assets/images/ch6-leave-behind.jpg';
+import ctaDrawing from '../assets/images/cta-terrain-drawing.webp';
+
+const expeditions = [
+  { no: '018', title: 'Dune House | Namibia', slug: 'dune-house', col: 'a' },
+  { no: '042', title: 'Horizon Station | Svalbard', slug: 'horizon-station', col: 'b' },
+  { no: '031', title: 'Ember Observatory | Iceland', slug: 'ember-observatory', col: 'c' },
+];
+---
+<Base>
+  <!-- ── Hero ─────────────────────────────────────────────── -->
+  <section class="sec hero" aria-labelledby="hero-title">
+    <Image class="layer hero-sky" src={heroSky} alt="" widths={[1440, 2880]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <Image class="layer hero-valley" src={heroValley} alt="Green valley with a lake beneath steep ridges in Svalbard" widths={[1440, 2880]} sizes="100vw" loading="eager" />
+    <Image class="layer hero-ridge" src={heroRidge} alt="" widths={[678, 1356]} sizes="47vw" loading="eager" />
+    <div class="layer hero-overlay" />
+
+    <h1 id="hero-title" class="display hero-h col-ab">The Earth Has Never Needed <em>Architecture</em>.</h1>
+    <p class="hero-people col-b" aria-hidden="true"><em>People do.</em></p>
+    <CircleButton href="/expeditions" label="View selected expeditions" class="hero-btn col-bc" />
+    <p class="mono hero-place col-a">SVALBARD, NORWAY</p>
+    <p class="mono hero-season col-b">FIELD SEASON 2026</p>
+    <p class="body justify hero-intro col-c">Before we draw a line, we follow the wind. We walk frozen coastlines before sunrise, return to the same ridge at dusk, and spend days observing what the landscape has been saying for centuries. Only then does architecture begin.</p>
+  </section>
+
+  <!-- ── Chapter I ────────────────────────────────────────── -->
+  <section class="sec ch1" aria-labelledby="ch1-title">
+    <Rails />
+    <p class="body justify ch1-text col-b">Millions of years before the first shelter, the Earth had already solved problems we continue to study. The desert learned to cool itself. The forest learned how to grow without collapsing. Glaciers taught patience. Volcanoes taught renewal. Every landscape carries an intelligence shaped by time. Our role isn't to replace it. It's to learn from it.</p>
+    <figure class="ch1-fig col-bc">
+      <Image src={fieldSeason} alt="Aerial view of forested hills at sunset with a small stone tower" widths={[1045, 2090]} sizes="73vw" />
+      <figcaption class="mono">Field Season 2024 — Svalbard</figcaption>
+    </figure>
+    <ChapterHeading class="ch1-head col-a" label="Chapter I" title="Before There Was <em>Architecture</em>" />
+  </section>
+
+  <!-- ── Quote: observation ───────────────────────────────── -->
+  <section class="sec obs" aria-label="Observation">
+    <Rails />
+    <Image class="layer obs-bg" src={quoteTerrain} alt="" widths={[1440, 2880]} sizes="100vw" />
+    <blockquote class="quote obs-q col-full center">“Three weeks. No drawings. Only observation.”</blockquote>
+    <p class="body justify obs-text col-a">Mountains reveal where the wind gathers. Rivers remember every flood. Deserts preserve only what belongs. Our work begins by paying attention to these patterns, allowing each landscape to shape the architecture long before we do.</p>
+  </section>
+
+  <!-- ── Chapter II ───────────────────────────────────────── -->
+  <section class="sec ch2" aria-labelledby="ch2-title">
+    <Rails />
+    <Image class="layer ch2-mountain" src={ch2Mountain} alt="" widths={[1761, 3522]} sizes="122vw" />
+    <FieldLog class="col-b ch2-log1" title="Expedition 042" lines={['Polar Coast', '28 Days', 'No sketches until Day 19.']} />
+    <p class="mono ch2-label col-full center">Chapter II</p>
+    <h2 id="ch2-title" class="display ch2-h col-b center">Every Commission Begins as an <em>Expedition</em>.</h2>
+    <p class="body ch2-text col-b center">Before a client becomes a collaborator… The site becomes our teacher. We walk coastlines before sunrise. We return to the same ridge at dusk. We measure the silence between gusts of wind. We speak with scientists, rangers, guides, and the people who have known the land longer than maps have. Sometimes we leave with pages of notes. Sometimes we leave with nothing but better questions. Either outcome is progress.</p>
+    <FieldLog class="col-c ch2-log2" title="Expedition 038" lines={['Namib Desert', '41 Days', 'The dunes moved farther than expected.', 'The building moved with them.']} />
+    <FieldLog class="col-a ch2-log3" title="Expedition 031" lines={['Icelandic Highlands', '17 Days', 'A volcanic vent changed the entire masterplan.']} />
+  </section>
+
+  <!-- ── Chapter III ──────────────────────────────────────── -->
+  <section class="sec ch3" aria-labelledby="ch3-title">
+    <Rails />
+    <div class="ch3-head col-full center">
+      <p class="mono">Chapter III</p>
+      <h2 id="ch3-title" class="display">The <em>Landscape</em> Decides.</h2>
+    </div>
+    <p class="body ch3-text col-b center">Not every place asks for the same answer. Some ask for warmth. Others ask for distance. Some ask for elevation. Others ask for restraint. We don't begin with a building type. We begin with an environment.</p>
+    <Image class="ch3-img1 col-b" src={ch3Polar} alt="Snow-covered mountains above a fjord with a small research settlement" widths={[690, 1380]} sizes="48vw" />
+    <Image class="ch3-img2 col-b" src={ch3Volcanic} alt="Volcano under cloud above a rocky autumn plain" widths={[690, 1380]} sizes="48vw" />
+    <FieldLog class="col-c ch3-polar" title="Polar" lines={['When daylight disappears for months, architecture becomes orientation.']} />
+    <FieldLog class="col-a ch3-desert" title="Desert" lines={['Shade becomes structure.', 'Water becomes geometry.']} />
+    <FieldLog class="col-b ch3-volcanic" title="Volcanic" lines={['Resilience is measured in adaptation, not resistance.']} />
+    <FieldLog class="col-a ch3-rain" title="Rainforest" lines={['The quietest intervention is often the most meaningful.']} />
+    <FieldLog class="col-b ch3-alpine" title="Alpine" lines={['Altitude changes every decision.', 'Including where the first line is drawn.']} />
+    <FieldLog class="col-c ch3-marine" title="Marine" lines={['The coastline is never still.', 'Neither are we.']} />
+  </section>
+
+  <!-- ── Chapter IV ───────────────────────────────────────── -->
+  <section class="sec ch4" aria-labelledby="ch4-title">
+    <Image class="layer ch4-bg" src={ch4Maps} alt="" widths={[1440, 2880]} sizes="100vw" />
+    <div class="layer ch4-overlay" />
+    <Rails only="right" />
+    <Image class="layer ch4-ridge" src={ch4Ridge} alt="" widths={[474, 948]} sizes="33vw" />
+    <blockquote class="quote ch4-q col-ab">“A building should never be the loudest thing in the landscape.”</blockquote>
+    <p class="body justify ch4-text col-c">There are places where roads end. Where supply chains become weather. Where construction is measured in seasons instead of schedules. Where mistakes remain visible for generations. These places demand more than architecture. They demand respect.</p>
+    <ChapterHeading class="ch4-head col-a" label="Chapter IV" title="We <em>Build</em> Where Maps Become <em>Quiet.</em>" />
+  </section>
+
+  <!-- ── Chapter V: Selected expeditions ──────────────────── -->
+  <section class="sec ch5" aria-labelledby="ch5-title">
+    {expeditions.map((e) => (
+      <a href={`/expeditions/${e.slug}`} class={`exp-card col-${e.col}`}>
+        <p class="exp-no">Expedition {e.no}</p>
+        <p class="exp-title">{e.title}</p>
+      </a>
+    ))}
+    <Rails />
+    <div class="ch5-center col-full">
+      <div class="ch5-head">
+        <p class="mono">Chapter V</p>
+        <h2 id="ch5-title" class="display">Selected <em>Expeditions</em></h2>
+      </div>
+      <CircleButton href="/expeditions" size="sm" label="View all expeditions" />
+    </div>
+  </section>
+
+  <!-- ── Chapter VI ───────────────────────────────────────── -->
+  <section class="sec ch6" aria-labelledby="ch6-title">
+    <Rails />
+    <p class="body justify ch6-text col-b">People often ask about the buildings. We think more about the places after we leave. Will wildlife return? Will water continue to flow as it always has? Will the next generation inherit more than concrete? Architecture is temporary. Landscapes are not.</p>
+    <FieldLog class="col-b ch6-log1" title="Every Expedition" lines={['Has changed us more than it changed the landscape.']} />
+    <FieldLog class="col-c ch6-log2" title="42 Days" lines={['Spent studying one mountain before deciding where not to build.']} />
+    <div class="ch6-fig col-bc">
+      <Image src={ch6Leave} alt="Alpine valley with a winding river and a cluster of huts" widths={[1045, 2090]} sizes="73vw" />
+      <div class="ch6-shade" />
+      <FieldLog class="ch6-stat1" title="13,842 Kilometers" lines={['Walked before our shortest expedition reached construction.']} />
+      <FieldLog class="ch6-stat2" title="0" lines={['Projects designed without standing on the land first.']} />
+    </div>
+    <ChapterHeading class="ch6-head col-a" label="Chapter VI" title="What We <em>Leave</em> Behind" />
+  </section>
+
+  <!-- ── CTA ──────────────────────────────────────────────── -->
+  <section class="sec cta" aria-labelledby="cta-title">
+    <Rails />
+    <Image class="layer cta-drawing" src={ctaDrawing} alt="" widths={[1439, 2878]} sizes="100vw" />
+    <blockquote class="cta-small col-bc">"The Earth has been designing for billions of years.<br />We are still learning how to listen."</blockquote>
+    <p class="body cta-text col-c">The planet is still changing. Every glacier retreat. Every shifting coastline. Every warming desert. Every rising tide. They ask new questions of architecture. Our work is not to have all the answers. It is to ask better questions. And to leave each place with the same respect we arrived with.</p>
+    <h2 id="cta-title" class="quote cta-q col-ab">Where should the next expedition begin?</h2>
+    <CircleButton href="/contact" label="Start a conversation" hoverText="Start a Conversation" class="cta-btn col-bc" />
+  </section>
+</Base>
+
+<style>
+  /* Hero */
+  .hero { height: 1024px; }
+  .hero :global(.hero-sky) { left: 0; top: 0; width: 100%; height: 868px; object-fit: cover; }
+  .hero :global(.hero-valley) { left: 0; top: 221px; width: 100%; height: 1509px; object-fit: cover; object-position: top; }
+  .hero :global(.hero-ridge) { left: calc(33.333% + 95px); top: 119px; width: 677.6px; height: 369.6px; }
+  .hero-overlay { inset: 0; background: rgba(30, 30, 28, 0.2); }
+  .hero-h { margin-top: 453px; width: 690px; }
+  .hero-people { margin-top: 590px; font-size: 72px; line-height: 1; white-space: nowrap; }
+  .hero-people em { font-weight: 300; letter-spacing: 0; }
+  :global(.hero-btn) { margin-top: 435px; margin-left: 526px; }
+  .hero-place, .hero-season { margin-top: 973px; white-space: nowrap; line-height: normal; }
+  .hero-intro { margin-top: 888px; width: 334px; margin-left: 1px; }
+
+  /* Chapter I */
+  .ch1 { height: 1024px; }
+  .ch1-text { margin-top: 216px; width: 393px; }
+  .ch1-fig { margin-top: 434px; height: 550px; position: relative; overflow: hidden; }
+  .ch1-fig :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .ch1-fig figcaption { position: absolute; left: 710px; top: 506px; white-space: nowrap; line-height: normal; text-box: none; }
+  :global(.ch1-head) { margin-top: 900px; width: 267px; }
+
+  /* Observation */
+  .obs { height: 1024px; }
+  .obs :global(.obs-bg) { left: 0; top: 0; width: 100%; height: 1104px; object-fit: cover; }
+  .obs-q { margin: 392px 0 0; width: 1224px; }
+  .obs-text { margin-top: 867px; width: 335px; }
+
+  /* Chapter II */
+  .ch2 { height: 1024px; }
+  .ch2 :global(.ch2-mountain) { left: -4px; top: 483px; width: 1761px; height: 995px; }
+  :global(.ch2-log1) { margin-top: 95px; width: 210px; }
+  .ch2-label { margin-top: 352px; }
+  .ch2-h { margin-top: 383px; }
+  .ch2-text { margin-top: 540px; }
+  :global(.ch2-log2) { margin-top: 656px; }
+  :global(.ch2-log3) { margin-top: 888px; width: 237px; }
+
+  /* Chapter III */
+  .ch3 { height: 2010px; }
+  .ch3-head { margin-top: 332px; width: 417px; display: flex; flex-direction: column; gap: 20px; }
+  .ch3-text { margin-top: 520px; width: 504px; }
+  :global(.ch3-img1), :global(.ch3-img2) { width: 100%; height: 450px; object-fit: cover; }
+  :global(.ch3-img1) { margin-top: 674px; }
+  :global(.ch3-img2) { margin-top: 1344px; }
+  :global(.ch3-polar) { margin-top: 674px; }
+  :global(.ch3-desert) { margin-top: 869px; width: 237px; }
+  :global(.ch3-volcanic) { margin-top: 1204px; width: 237px; }
+  :global(.ch3-rain) { margin-top: 1539px; width: 237px; }
+  :global(.ch3-alpine) { margin-top: 1874px; width: 237px; }
+  :global(.ch3-marine) { margin-top: 1344px; width: 237px; }
+
+  /* Chapter IV */
+  .ch4 { height: 1024px; background: transparent; }
+  .ch4 :global(.ch4-bg) { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ch4-overlay { inset: 0; background: var(--overlay); }
+  .ch4 :global(.ch4-ridge) { left: calc(50% + 86.64px); top: 174.44px; width: 474.32px; height: 258.72px; opacity: 0.7; z-index: 1; }
+  .ch4-q { margin-top: 149px; width: 1024px; margin-inline: 0; }
+  .ch4-text { margin-top: 684px; }
+  :global(.ch4-head) { margin-top: 900px; width: 299px; }
+
+  /* Chapter V */
+  .ch5 { height: 1024px; }
+  .exp-card {
+    grid-row: 1; align-self: stretch !important; z-index: 1 !important;
+    background: var(--dark);
+    display: flex; flex-direction: column; gap: 20px;
+    padding: 778px 20px 0;
+  }
+  .exp-card.col-a { grid-column: 1 / 3; }
+  .exp-card.col-b { grid-column: 4; }
+  .exp-card.col-c { grid-column: 6 / 8; }
+  .exp-no { font-family: var(--mono); font-weight: 500; font-size: 16px; line-height: 1.3; color: var(--white-70); width: 289px; }
+  .exp-title { font-weight: 500; font-size: 24px; line-height: 1.3; width: 289px; }
+  .ch5-center {
+    align-self: center !important; justify-self: center;
+    display: flex; flex-direction: column; align-items: center; gap: 40px;
+    margin: 1px 0 0 1px; z-index: 3 !important;
+  }
+  .ch5-head { width: 335px; display: flex; flex-direction: column; gap: 20px; text-align: center; }
+
+  /* Chapter VI */
+  .ch6 { height: 1024px; }
+  .ch6-text { margin-top: 80px; width: 393px; }
+  :global(.ch6-log1) { margin-top: 294px; width: 210px; }
+  :global(.ch6-log2) { margin-top: 80px; width: 210px; }
+  .ch6-fig { margin-top: 434px; height: 550px; position: relative; overflow: hidden; }
+  .ch6-fig > :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .ch6-shade { position: absolute; inset: 0; background: var(--dark-30); }
+  .ch6-fig :global(.ch6-stat1), .ch6-fig :global(.ch6-stat2) { position: absolute; left: 710px; width: 210px; }
+  .ch6-fig :global(.ch6-stat1) { top: 20px; }
+  .ch6-fig :global(.ch6-stat2) { top: 452px; }
+  :global(.ch6-head) { margin-top: 900px; width: 267px; }
+
+  /* CTA */
+  .cta { height: 1364px; }
+  .cta :global(.cta-drawing) { left: 0; top: 0; width: 1439px; height: 1364px; opacity: 0.2; }
+  .cta-small {
+    margin: 160px 0 0; white-space: nowrap;
+    font-family: var(--serif); font-style: italic; font-weight: 100; font-size: 32px; line-height: normal;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+  }
+  .cta-text { margin-top: 341px; width: 338px; }
+  .cta-q { margin-top: 714px; width: 1024px; }
+  :global(.cta-btn) { margin-top: 994px; margin-left: 440px; }
+  /* ── Tablet / phone ─────────────────────────────────────── */
+  @media (max-width: 1023.98px) {
+    .hero { min-height: max(100svh, 720px); justify-content: flex-end; padding-bottom: 40px; gap: 24px; }
+    .hero :global(.hero-sky) { height: 70%; }
+    .hero :global(.hero-valley) { top: 22%; height: 100%; }
+    .hero :global(.hero-ridge) { display: none; }
+    .hero-people { font-size: clamp(40px, 4.4vw + 22px, 64px); margin-top: -12px !important; }
+    :global(.hero-btn) { order: 2; }
+    .hero-intro { order: 1; max-width: 420px !important; }
+    .hero-place { order: 3; }
+    .hero-season { order: 4; margin-top: -12px !important; }
+
+    :global(.ch1-head), :global(.ch6-head), :global(.ch4-head) { order: -1; }
+    .ch1-text, .ch6-text { max-width: 560px !important; }
+    .ch1-fig { height: auto; aspect-ratio: 1045 / 550; min-height: 260px; }
+    .ch1-fig figcaption { left: 16px; top: auto; bottom: 16px; }
+
+    .obs { padding-block: 200px 120px; min-height: 100svh; justify-content: space-between; }
+    .obs :global(.obs-bg) { height: 100%; }
+    .obs-text { max-width: 420px !important; }
+
+    .ch2 { padding-bottom: max(70vw, 320px); }
+    .ch2 :global(.ch2-mountain) { top: auto; bottom: -18vw; left: -10%; width: 150%; height: auto; }
+    .ch2-label { order: 1; }
+    .ch2-h { order: 2; margin-top: -20px !important; }
+    .ch2-text { order: 3; max-width: 640px !important; align-self: center !important; }
+    :global(.ch2-log1) { order: 4; }
+    :global(.ch2-log2) { order: 5; }
+    :global(.ch2-log3) { order: 6; }
+
+    .ch3-head { align-items: center; }
+    .ch3-text { max-width: 560px !important; align-self: center !important; }
+    :global(.ch3-img1), :global(.ch3-img2) { height: auto; aspect-ratio: 690 / 450; }
+    :global(.ch3-img1) { order: 1; } :global(.ch3-polar) { order: 2; } :global(.ch3-desert) { order: 3; }
+    :global(.ch3-volcanic) { order: 4; } :global(.ch3-img2) { order: 5; } :global(.ch3-marine) { order: 6; }
+    :global(.ch3-rain) { order: 7; } :global(.ch3-alpine) { order: 8; }
+
+    .ch4 { min-height: 100svh; }
+    .ch4 :global(.ch4-ridge) { display: none; }
+    .ch4-text { max-width: 420px !important; }
+
+    .ch5 { gap: 0; }
+    .ch5-center { order: -1; padding-bottom: 80px; align-self: center !important; }
+    .ch5-head { width: auto; }
+    .exp-card { padding: 24px 0 32px; gap: 12px; border-top: 0.5px solid var(--rail); background: none; }
+    .exp-card:last-of-type { border-bottom: 0.5px solid var(--rail); }
+    .exp-no, .exp-title { width: auto; }
+    .exp-title { font-size: 22px; }
+
+    .ch6-fig { height: auto; min-height: 480px; aspect-ratio: 1045 / 550; }
+    .ch6-fig > :global(img) { position: absolute; inset: 0; }
+    .ch6-fig :global(.ch6-stat1), .ch6-fig :global(.ch6-stat2) { left: 20px; }
+    .ch6-fig :global(.ch6-stat2) { top: auto; bottom: 20px; }
+
+    .cta { min-height: 100svh; }
+    .cta :global(.cta-drawing) { width: 100%; height: 100%; object-fit: cover; }
+    .cta-small { white-space: normal; font-size: clamp(22px, 2vw + 14px, 32px); }
+    .cta-small br { display: none; }
+    .cta-text { max-width: 420px !important; }
+    .cta-q { order: 1; }
+    :global(.cta-btn) { order: 2; }
+  }
+</style>

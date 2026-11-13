@@ -1,0 +1,15 @@
+---
+/** "Chapter N" mono label above a title. Title HTML may contain <em> accents. */
+interface Props { label: string; title: string; size?: 'title' | 'display'; align?: 'left' | 'center'; class?: string; style?: string; as?: 'h1' | 'h2' }
+const { label, title, size = 'title', align = 'left', class: cls = '', style, as: Tag = 'h2' } = Astro.props;
+---
+<div class:list={['chapter', align, size, cls]} style={style}>
+  <p class="mono">{label}</p>
+  <Tag class={size} set:html={title} />
+</div>
+
+<style>
+  .chapter { display: flex; flex-direction: column; gap: 21px; }
+  .chapter.display { gap: 20px; }
+  .center { align-items: center; text-align: center; }
+</style>
