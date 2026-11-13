@@ -1,0 +1,54 @@
+number: "036"
+title: "Col Refuge"
+accent: "Refuge"
+region: "Torres del Paine, Chile"
+location: "Torres del Paine, Chile"
+coords: "50°56′S • 72°58′W"
+terrain: "Patagonian Pass"
+landscape: "Alpine"
+days: 22
+year: 2025
+firstSketch: "Day 15"
+status: "Built 2025"
+featured: false
+order: 5
+cover: "../../assets/images/ch6-leave-behind.jpg"
+plate: "../../assets/images/ch6-leave-behind.jpg"
+summary: "A shelter on a high Patagonian pass, built in one season from what the mountain and the valley could give."
+site: "The col sits where two valleys exchange their weather. Winds reach 150 km/h in the afternoon and drop to nothing by night. The brief asked for a refuge for sixteen hikers. The site asked for a building the wind could pass over."
+siteImage: "../../assets/images/ch3-polar.jpg"
+siteLogs:
+  - title: "Client"
+    lines: ["National park authority"]
+  - title: "Programme"
+    lines: ["Refuge for 16", "Ranger room", "Emergency store"]
+  - title: "Area"
+    lines: ["140 m²"]
+journal:
+  - day: "DAY 01"
+    date: "03 JAN 2025 • 6°C"
+    text: "Lost a tent to the afternoon wind. Pitched the next one in the shadow of a boulder and slept well."
+  - day: "DAY 08"
+    date: "10 JAN 2025 • 4°C"
+    text: "The boulders along the col all lean the same way. The wind has been designing here for a long time."
+  - day: "DAY 15"
+    date: "17 JAN 2025 • 5°C"
+    text: "First sketch. A low stone back to the west, an open face to the valley. The boulders showed us how."
+    accent: "The boulders showed us how."
+  - day: "DAY 22"
+    date: "24 JAN 2025 • 3°C"
+    text: "Stone quarried from the moraine below. Nothing will be flown in that the valley can provide."
+quote: "“The wind had already drawn the shelter. We only traced it in stone.”"
+plates:
+  - image: "../../assets/images/ch6-leave-behind.jpg"
+    caption: "Plate 01 — The col from the eastern valley, day 4"
+  - image: "../../assets/images/ch3-polar.jpg"
+    caption: "Plate 02 — Wind shadow study, day 11"
+numbers:
+  - value: "150 km/h"
+    label: "Afternoon gusts recorded on the col"
+  - value: "1 season"
+    label: "From first stone to first guest"
+  - value: "80%"
+    label: "Materials sourced within the valley"
+next: "shifting-ground"

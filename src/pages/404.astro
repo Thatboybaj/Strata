@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Rails from '../components/Rails.astro';
+import CircleButton from '../components/CircleButton.astro';
+import FieldLog from '../components/FieldLog.astro';
+import drawing from '../assets/images/cta-terrain-drawing.webp';
+---
+<Base inner footer={false} title="Off the map — STRATA" description="The page you were looking for has moved, or never existed." navLabel="ERROR 404" navCoords="00°00′N • 00°00′E">
+  <section class="sec nf" aria-labelledby="nf-title">
+    <Rails />
+    <Image class="layer drawing" src={drawing} alt="" widths={[1440, 2880]} sizes="100vw" loading="eager" />
+    <p class="nf-num col-b center" aria-hidden="true">404</p>
+    <h1 id="nf-title" class="display-xl nf-h col-ab">You’ve Walked <em>Off the Map.</em></h1>
+    <FieldLog class="col-c nf-log" title="Expedition 404" lines={['Unknown terrain', '0 days on site', 'No landmarks recorded.']} />
+    <p class="body nf-text col-c">The page you were looking for has moved, or never existed. Even the best expeditions take a wrong turn.</p>
+    <div class="nf-back col-c">
+      <CircleButton href="/" size="sm" label="Return to base" />
+      <a href="/" class="mono-sm back-label">RETURN TO BASE</a>
+    </div>
+    <p class="mono nf-b col-a">© 2026 STRATA</p>
+    <a class="mono nf-b col-b" href="/expeditions">SELECTED EXPEDITIONS ↗</a>
+    <a class="mono nf-b col-b nf-b3" href="/contact">CONTACT A FIELD OFFICE ↗</a>
+    <p class="mono nf-b col-c nf-b4">FIELD SEASON 2026</p>
+  </section>
+</Base>
+
+<style>
+  .nf { height: 1024px; }
+  .nf :global(.drawing) { left: 0; top: 0; width: 100%; height: 1364px; object-fit: cover; opacity: 0.2; }
+  .nf-num {
+    margin-top: 110px; width: 690px;
+    font-family: var(--serif); font-style: italic; font-weight: 100; font-size: 380px; line-height: 0.9;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+  }
+  .nf-h { margin-top: 600px; width: 1045px; }
+  :global(.nf-log) { margin-top: 600px; width: 335px; }
+  .nf-text { margin-top: 720px; width: 335px; }
+  .nf-back { margin-top: 800px; display: flex; align-items: center; gap: 20px; }
+  .back-label { color: var(--white); }
+  .nf-b { margin-top: 968px; white-space: nowrap; }
+  .nf-b3 { margin-left: 355px; }
+  .nf-b4 { justify-self: end; }
+  a.nf-b { transition: opacity .3s; } a.nf-b:hover { opacity: .6; }
+
+  @media (max-width: 1023.98px) {
+    .nf { min-height: 100svh; padding-top: 120px; }
+    .nf-num { font-size: clamp(160px, 30vw, 300px); align-self: center !important; }
+    .nf :global(.drawing) { height: 100%; }
+    .nf-b { font-size: 14px; }
+    .nf-b3 { margin-left: 0 !important; }
+    .nf-b4 { display: none; }
+  }
+</style>

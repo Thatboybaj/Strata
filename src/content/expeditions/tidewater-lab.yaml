@@ -1,0 +1,54 @@
+number: "040"
+title: "Tidewater Lab"
+accent: "Lab"
+region: "Lofoten, Norway"
+location: "Lofoten, Norway"
+coords: "68°14′N • 14°34′E"
+terrain: "Arctic Shoreline"
+landscape: "Marine"
+days: 19
+year: 2025
+firstSketch: "Day 13"
+status: "Built 2025"
+featured: false
+order: 7
+cover: "../../assets/images/ch3-polar.jpg"
+plate: "../../assets/images/ch3-polar.jpg"
+summary: "A marine laboratory on a Lofoten shoreline, designed to sit between the high and low tide lines."
+site: "The shoreline here is never the same twice a day. The tide range is three metres and winter storms move boulders the size of cars. The brief asked for a lab beside the water. The site asked for one that the water could pass under."
+siteImage: "../../assets/images/ch3-volcanic.jpg"
+siteLogs:
+  - title: "Client"
+    lines: ["Marine biology institute"]
+  - title: "Programme"
+    lines: ["Tidal lab", "Dive store", "Six bunks"]
+  - title: "Area"
+    lines: ["220 m²"]
+journal:
+  - day: "DAY 01"
+    date: "12 MAR 2025 • 2°C"
+    text: "Low tide at 06:10. We walked out to where the building might stand and were back on the beach by 09:00."
+  - day: "DAY 06"
+    date: "17 MAR 2025 • −1°C"
+    text: "A storm moved the boulder we had been using as a datum. We started again with the cliff."
+  - day: "DAY 13"
+    date: "24 MAR 2025 • 1°C"
+    text: "First sketch. A lab on slender legs, sea below at high tide and shore below at low. The coastline is never still."
+    accent: "The coastline is never still."
+  - day: "DAY 19"
+    date: "30 MAR 2025 • 3°C"
+    text: "Positioned the legs between kelp beds. The divers say the fish are already using the survey poles."
+quote: "“The coastline is never still. Neither are we.”"
+plates:
+  - image: "../../assets/images/ch3-polar.jpg"
+    caption: "Plate 01 — Low tide at 06:10, day 1"
+  - image: "../../assets/images/ch6-leave-behind.jpg"
+    caption: "Plate 02 — Leg position survey, day 15"
+numbers:
+  - value: "3 m"
+    label: "Tidal range under the building"
+  - value: "19 days"
+    label: "On the shoreline before the first sketch"
+  - value: "8"
+    label: "Legs, placed between kelp beds"
+next: "ridge-shelter"

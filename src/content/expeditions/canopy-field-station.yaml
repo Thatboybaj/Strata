@@ -1,0 +1,54 @@
+number: "027"
+title: "Canopy Field Station"
+accent: "Field Station"
+region: "Great Bear Rainforest, Canada"
+location: "Great Bear Rainforest, Canada"
+coords: "52°23′N • 128°02′W"
+terrain: "Coastal Rainforest"
+landscape: "Rainforest"
+days: 33
+year: 2023
+firstSketch: "Day 21"
+status: "Built 2023"
+featured: false
+order: 4
+cover: "../../assets/images/ch1-field-season.jpg"
+plate: "../../assets/images/ch1-field-season.jpg"
+summary: "A research station raised among the cedars, designed so that no tree older than the studio would be cut."
+site: "The forest floor here belongs to bears and salmon. Rain falls on two hundred days a year and the oldest cedars predate every building in the province. The brief asked for a field station for twenty researchers. The site asked us to stay off the ground."
+siteImage: "../../assets/images/ch6-leave-behind.jpg"
+siteLogs:
+  - title: "Client"
+    lines: ["Coastal conservation trust"]
+  - title: "Programme"
+    lines: ["Wet lab", "20 bunks", "Canopy walkway"]
+  - title: "Area"
+    lines: ["520 m²"]
+journal:
+  - day: "DAY 01"
+    date: "10 SEP 2023 • 12°C"
+    text: "Rain for eleven hours. We learned to read the forest by sound before we could see it."
+  - day: "DAY 09"
+    date: "18 SEP 2023 • 11°C"
+    text: "Counted 214 trees over five hundred years old within the study area. Every one is now on the drawings."
+  - day: "DAY 21"
+    date: "30 SEP 2023 • 10°C"
+    text: "First sketch. A light frame threaded between the trunks, resting on nine points. The forest stays underneath."
+    accent: "The forest stays underneath."
+  - day: "DAY 33"
+    date: "12 OCT 2023 • 9°C"
+    text: "The salmon are back in the creek. We moved the access path a second time."
+quote: "“We drew the trees first. The building is what was left.”"
+plates:
+  - image: "../../assets/images/ch1-field-season.jpg"
+    caption: "Plate 01 — The cedar stand at dusk, day 9"
+  - image: "../../assets/images/ch3-volcanic.jpg"
+    caption: "Plate 02 — Footing survey, day 18"
+numbers:
+  - value: "214"
+    label: "Trees over 500 years old mapped and kept"
+  - value: "9"
+    label: "Points where the frame meets the ground"
+  - value: "0"
+    label: "Old-growth trees cut"
+next: "col-refuge"

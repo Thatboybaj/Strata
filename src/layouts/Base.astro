@@ -2,11 +2,11 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-interface Props { title?: string; description?: string; navLabel?: string; navCoords?: string; footer?: boolean }
+interface Props { title?: string; description?: string; navLabel?: string; navCoords?: string; footer?: boolean; inner?: boolean }
 const {
   title = 'STRATA — Architecture for the places that shape us',
   description = 'STRATA is an architecture studio that begins every commission as an expedition — designing for polar coasts, deserts, volcanic plateaus, rainforests and alpine sites.',
-  navLabel, navCoords, footer = true,
+  navLabel, navCoords, footer = true, inner = false,
 } = Astro.props;
 ---
 <!doctype html>
@@ -30,7 +30,7 @@ const {
   </head>
   <body>
     <Nav label={navLabel} coords={navCoords} />
-    <main>
+    <main class:list={[{ inner }]}>
       <slot />
     </main>
     {footer && <Footer />}

@@ -1,0 +1,187 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Rails from '../../components/Rails.astro';
+import CircleButton from '../../components/CircleButton.astro';
+import FieldLog from '../../components/FieldLog.astro';
+import ChapterHeading from '../../components/ChapterHeading.astro';
+import { accent } from '../../lib/text';
+import mountain from '../../assets/images/footer-mountain.webp';
+
+export async function getStaticPaths() {
+  const all = await getCollection('expeditions');
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const e = entry.data;
+const next = e.next ? await getEntry(e.next) : undefined;
+const [plate1, plate2] = e.plates;
+---
+<Base inner title={`${e.title} — Expedition ${e.number} — STRATA`} description={e.summary} navLabel={`EXPEDITION ${e.number}`} navCoords={e.coords}>
+  <section class="sec hero" aria-labelledby="x-title">
+    <Image class="layer cover" src={e.cover} alt="" widths={[1440, 2880]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="layer overlay" />
+    <h1 id="x-title" class="display-xxl x-title col-ab" set:html={accent(e.title, e.accent)} />
+    <p class="mono x-m col-a">{e.region.toUpperCase()}</p>
+    <p class="mono x-m col-b">{e.landscape.toUpperCase()} • {e.year}</p>
+    <p class="body x-sum col-c">{e.summary}</p>
+  </section>
+
+  <section class="sec facts" aria-label="Facts">
+    <Rails />
+    <dl class="facts-grid col-inner">
+      <div><dt class="mono-sm">LANDSCAPE</dt><dd class="h-48">{e.landscape}</dd></div>
+      <div><dt class="mono-sm">DAYS ON SITE</dt><dd class="h-48">{e.days}</dd></div>
+      <div><dt class="mono-sm">FIRST SKETCH</dt><dd class="h-48">{e.firstSketch}</dd></div>
+      <div><dt class="mono-sm">STATUS</dt><dd class="h-48">{e.status}</dd></div>
+    </dl>
+  </section>
+
+  <section class="sec site" aria-labelledby="site-title">
+    <Rails />
+    <p class="body site-text col-b">{e.site}</p>
+    <div class="site-logs col-c">
+      {e.siteLogs.map((l) => <FieldLog title={l.title} lines={l.lines} />)}
+    </div>
+    <Image class="site-img col-bc" src={e.siteImage} alt={`The site at ${e.location}`} widths={[1045, 2090]} sizes="(max-width: 1023px) 100vw, 73vw" />
+    <ChapterHeading class="col-a site-head" label="Chapter I" title="The <em>Site</em>" />
+  </section>
+
+  <section class="sec journal" aria-labelledby="j-title">
+    <Rails />
+    <ChapterHeading class="col-b j-head" size="display" align="center" label="Chapter II" title="Field <em>Journal</em>" />
+    <ol class="entries col-full">
+      {e.journal.map((j) => (
+        <li class="entry">
+          <p class="j-day"><span class="name t">{j.day}</span><span class="mono-sm t">{j.date}</span></p>
+          <p class="journal-t j-text" set:html={accent(j.text, j.accent)} />
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="sec xquote" aria-label="Quote">
+    <Rails />
+    <Image class="layer mtn" src={mountain} alt="" widths={[1761, 2878]} sizes="122vw" />
+    <blockquote class="quote xq col-full center">{e.quote}</blockquote>
+  </section>
+
+  <section class="sec gallery" aria-label="Gallery">
+    <Rails />
+    {plate1 && (
+      <figure class="g1 col-ab">
+        <Image src={plate1.image} alt={plate1.caption} widths={[1045, 2090]} sizes="(max-width: 1023px) 100vw, 73vw" />
+        <figcaption class="mono-sm">{plate1.caption}</figcaption>
+      </figure>
+    )}
+    {plate2 && (
+      <figure class="g2 col-c">
+        <Image src={plate2.image} alt={plate2.caption} widths={[335, 670]} sizes="(max-width: 1023px) 100vw, 24vw" />
+        <figcaption class="mono-sm">{plate2.caption}</figcaption>
+      </figure>
+    )}
+  </section>
+
+  <section class="sec numbers" aria-labelledby="n-title">
+    <Rails />
+    <ChapterHeading class="col-a n-head" label="Chapter III" title="By the <em>Numbers</em>" />
+    <ul class="stats col-bc">
+      {e.numbers.map((n) => <li><span class="display t">{n.value}</span><span class="mono-sm t">{n.label}</span></li>)}
+    </ul>
+  </section>
+
+  {next && (
+    <section class="sec next" aria-labelledby="next-title">
+      <Rails />
+      <p class="mono nx-label col-a">Next — Expedition {next.data.number}</p>
+      <h2 id="next-title" class="display-l nx-title col-ab"><a href={`/expeditions/${next.id}`} set:html={accent(next.data.title, next.data.accent)} /></h2>
+      <p class="mono-sm nx-meta col-ab">{next.data.location.toUpperCase()} • {next.data.landscape.toUpperCase()}</p>
+      <CircleButton href={`/expeditions/${next.id}`} size="sm" label={`Next expedition: ${next.data.title}`} class="nx-btn col-c" />
+      <a class="layer nx-cover" href={`/expeditions/${next.id}`} tabindex="-1" aria-hidden="true">
+        <Image src={next.data.cover} alt="" widths={[1440, 2880]} sizes="100vw" />
+      </a>
+    </section>
+  )}
+</Base>
+
+<style>
+  .hero { height: 1024px; }
+  .hero :global(.cover) { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .overlay { inset: 0; background: var(--overlay); }
+  .x-title { margin-top: 680px; width: 932px; }
+  .x-m { margin-top: 968px; white-space: nowrap; }
+  .x-sum { margin-top: 910px; width: 335px; }
+
+  .facts { height: 260px; }
+  .facts-grid { margin-top: 40px; height: 181px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; border-top: 1px solid rgba(255,255,255,.25); border-bottom: 1px solid rgba(255,255,255,.25); }
+  .facts-grid div { padding-top: 35px; display: flex; flex-direction: column; gap: 22px; }
+  dd { margin: 0; }
+
+  .site { height: 1000px; }
+  .site-text { margin-top: 120px; width: 393px; }
+  .site-logs { margin-top: 120px; display: flex; flex-direction: column; gap: 60px; }
+  .site-logs > :global(*) { min-height: 50px; }
+  .site :global(.site-img) { margin-top: 460px; width: 100%; height: 480px; object-fit: cover; }
+  :global(.site-head) { margin-top: 856px; width: 300px; }
+
+  .journal { padding-bottom: 50px; }
+  :global(.j-head) { margin-top: 120px; width: 690px; }
+  .entries { margin: 330px 20px 0; border-bottom: 1px solid rgba(255,255,255,.25); }
+  .entry { display: grid; grid-template-columns: 335fr 20fr 690fr 20fr 335fr; min-height: 180px; border-top: 1px solid rgba(255,255,255,.25); align-items: start; padding-bottom: 30px; }
+  .j-day { grid-column: 1; margin-top: 29px; display: flex; flex-direction: column; gap: 7px; }
+  .j-text { grid-column: 3; margin-top: 27px; }
+
+  .xquote { height: 900px; }
+  .xquote :global(.mtn) { left: -4px; top: 360px; width: 1761px; height: 995px; }
+  .xq { margin-top: 140px; width: 1224px; font-size: 120px; }
+
+  .gallery { height: 900px; }
+  .g1, .g2 { margin-top: 120px; display: flex; flex-direction: column; gap: 20px; }
+  .g1 :global(img) { width: 100%; height: 620px; object-fit: cover; }
+  .g2 :global(img) { width: 100%; height: 440px; object-fit: cover; }
+
+  .numbers { height: 600px; }
+  :global(.n-head) { margin-top: 120px; width: 300px; }
+  .stats { margin-top: 120px; display: grid; grid-template-columns: 335fr 20fr 335fr 20fr 335fr; }
+  .stats li { display: flex; flex-direction: column; gap: 55px; }
+  .stats li:nth-child(2) { grid-column: 3; } .stats li:nth-child(3) { grid-column: 5; }
+  .stats li .mono-sm { width: 300px; max-width: 100%; }
+
+  .next { height: 900px; }
+  .nx-label { margin-top: 120px; }
+  .nx-title { margin-top: 160px; width: 840px; }
+  .nx-meta { margin-top: 300px; }
+  :global(.nx-btn) { margin-top: 140px; justify-self: end; }
+  .nx-cover { left: 0; right: 0; top: 380px; height: 520px; pointer-events: auto; z-index: 1; align-self: start !important; }
+  .nx-cover :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+  .nx-cover:hover :global(img) { transform: scale(1.03); }
+
+  @media (max-width: 1023.98px) {
+    .hero { min-height: max(100svh, 720px); justify-content: flex-end; padding-bottom: 40px; gap: 20px; }
+    .x-sum { order: 1; max-width: 420px !important; }
+    .x-m { order: 2; }
+    .facts { padding-block: 40px; }
+    .facts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); height: auto; row-gap: 0; }
+    .facts-grid div { padding-block: 24px; gap: 14px; }
+    :global(.site-head) { order: -1; }
+    .site-text { max-width: 560px !important; }
+    .site-logs { flex-direction: row; flex-wrap: wrap; gap: 28px; }
+    .site-logs > :global(*) { flex: 1 1 180px; min-height: 0; }
+    .site :global(.site-img) { height: auto; aspect-ratio: 1045 / 480; }
+    .entries { margin: 0 !important; }
+    .entry { grid-template-columns: 1fr; min-height: 0; padding: 22px 0 28px; gap: 14px; }
+    .j-day, .j-text { grid-column: 1; margin: 0; }
+    .xquote { min-height: 80svh; padding-bottom: 60vw; }
+    .xquote :global(.mtn) { top: auto; bottom: -30vw; left: -10%; width: 150%; height: auto; }
+    .xq { font-size: clamp(48px, 9vw + 16px, 96px); }
+    .g1 :global(img) { height: auto; aspect-ratio: 1045 / 620; }
+    .g2 :global(img) { height: auto; aspect-ratio: 335 / 440; max-height: 70svh; }
+    :global(.n-head) { order: -1; }
+    .stats { display: flex; flex-direction: column; gap: 36px; }
+    .stats li { gap: 14px; }
+    .next { padding-bottom: calc(52vw + 40px); }
+    .nx-cover { top: auto; bottom: 0; height: 52vw; }
+    :global(.nx-btn) { order: 3; }
+  }
+</style>

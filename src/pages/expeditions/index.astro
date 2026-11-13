@@ -1,0 +1,160 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Rails from '../../components/Rails.astro';
+import CircleButton from '../../components/CircleButton.astro';
+import FieldLog from '../../components/FieldLog.astro';
+import ChapterHeading from '../../components/ChapterHeading.astro';
+import { accent, landscapes } from '../../lib/text';
+
+const all = (await getCollection('expeditions')).sort((a, b) => a.data.order - b.data.order);
+const featured = all.find((e) => e.data.featured) ?? all[0];
+const list = all.filter((e) => e.id !== featured.id);
+const count = (l: string) => all.filter((e) => e.data.landscape === l).length;
+const groupB = landscapes.slice(0, 4);
+const groupC = landscapes.slice(4);
+const f = featured.data;
+const PAGE = 7; // list rows shown before "load more"
+---
+<Base inner title="Expeditions — STRATA" description="Every STRATA project began the same way: with weeks on a site and no drawings. Browse expeditions by landscape." navLabel="EXPEDITIONS" navCoords={`${all.length} EXPEDITIONS • ${new Set(all.map((e) => e.data.landscape)).size} LANDSCAPES`}>
+  <section class="sec header" aria-labelledby="exp-title">
+    <Rails />
+    <ChapterHeading class="col-b exp-head" size="display" align="center" as="h1" label="Chapter V" title="Selected <em>Expeditions</em>" />
+    <p class="body exp-intro col-b center">Every project on this page began the same way: with weeks on a site and no drawings. Filter by the landscape that shaped it.</p>
+    <div class="filters col-full" role="group" aria-label="Filter by landscape" data-filters>
+      <div class="fa"><button class="mono-sm filter" aria-pressed="true" data-filter="all"><span>All ({all.length})</span></button></div>
+      <div class="fb">{groupB.map((l) => <button class="mono-sm filter" aria-pressed="false" data-filter={l}><span>{l} ({count(l)})</span></button>)}</div>
+      <div class="fc">{groupC.map((l) => <button class="mono-sm filter" aria-pressed="false" data-filter={l}><span>{l} ({count(l)})</span></button>)}</div>
+    </div>
+    <div class="hline head-line col-inner" />
+  </section>
+
+  <section class="sec featured" aria-label="Featured expedition" data-landscape={f.landscape} data-item>
+    <Rails />
+    <a class="feat-img col-bc" href={`/expeditions/${featured.id}`} tabindex="-1" aria-hidden="true">
+      <Image src={f.cover} alt="" widths={[1045, 2090]} sizes="(max-width: 1023px) 100vw, 73vw" />
+    </a>
+    <FieldLog class="col-a feat-log" title={`Featured — Expedition ${f.number}`} lines={[f.terrain, `${f.days} days on site`, `Completed ${f.year}`]} />
+    <h2 class="display feat-title col-b"><a href={`/expeditions/${featured.id}`} set:html={accent(f.title, f.accent)} /></h2>
+    <p class="mono-sm feat-meta col-c">{f.region.toUpperCase()}<br />{f.coords}</p>
+    <CircleButton href={`/expeditions/${featured.id}`} size="sm" label={`Read expedition ${f.number}: ${f.title}`} class="feat-btn col-c" />
+  </section>
+
+  <section class="sec list" aria-label="All expeditions">
+    <Rails />
+    <p class="mono-sm lh col-a">NO.</p>
+    <p class="mono-sm lh col-b">EXPEDITION</p>
+    <p class="mono-sm lh col-c">PLATE</p>
+    <ul class="rows col-full">
+      {list.map((e, i) => (
+        <li data-landscape={e.data.landscape} data-item hidden={i >= PAGE}>
+          <a class="row" href={`/expeditions/${e.id}`}>
+            <span class="r-no"><span class="name t">Expedition {e.data.number}</span><span class="mono-sm t">{e.data.landscape} · {e.data.days} days · {e.data.year}</span></span>
+            <span class="r-main"><span class="h-48 t" set:html={accent(e.data.title, e.data.accent)} /><span class="mono-sm t">{e.data.location}</span></span>
+            <span class="r-plate"><Image src={e.data.plate} alt={`${e.data.title}, ${e.data.location}`} widths={[335, 670]} sizes="(max-width: 1023px) 40vw, 24vw" /></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="sec more" aria-label="More expeditions">
+    <Rails />
+    <CircleButton size="sm" label="Load more expeditions" class="more-btn col-full" data-more />
+    <p class="mono-sm more-text col-full center" data-showing aria-live="polite">Showing {Math.min(all.length, PAGE + 1)} of {all.length} expeditions</p>
+  </section>
+</Base>
+
+<script>
+  const PAGE = 7;
+  let limit = PAGE;
+  let current = 'all';
+  const more = document.querySelector<HTMLElement>('[data-more]');
+  const wrap = document.querySelector('[data-filters]');
+  const items = [...document.querySelectorAll<HTMLElement>('[data-item]')];
+  const showing = document.querySelector('[data-showing]');
+  wrap?.addEventListener('click', (ev) => {
+    const btn = (ev.target as HTMLElement).closest<HTMLButtonElement>('[data-filter]');
+    if (!btn) return;
+    current = btn.dataset.filter ?? 'all';
+    limit = PAGE;
+    wrap.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    render();
+  });
+  more?.addEventListener('click', () => { limit += PAGE; render(); });
+  function render() {
+    const featured = items[0];
+    const rows = items.slice(1);
+    const match = (el: HTMLElement) => current === 'all' || el.dataset.landscape === current;
+    featured.hidden = !match(featured);
+    const hits = rows.filter(match);
+    rows.forEach((el) => { el.hidden = true; });
+    hits.slice(0, limit).forEach((el) => { el.hidden = false; });
+    const total = hits.length + (match(featured) ? 1 : 0);
+    const shown = Math.min(hits.length, limit) + (match(featured) ? 1 : 0);
+    if (showing) showing.textContent = `Showing ${shown} of ${total} expeditions`;
+    if (more) more.style.visibility = hits.length > limit ? 'visible' : 'hidden';
+  }
+  render();
+</script>
+
+<style>
+  .header { height: 900px; }
+  :global(.exp-head) { margin-top: 280px; width: 690px; }
+  :global(.exp-head) :global(h1) { font-size: 96px; }
+  .exp-intro { margin-top: 560px; width: 504px; }
+  .filters { margin-top: 776px; display: grid; grid-template-columns: var(--cols); }
+  .fa { grid-column: 2; } .fb { grid-column: 4; display: flex; } .fc { grid-column: 6; display: flex; }
+  .fb .filter, .fc .filter { width: 180px; text-align: left; }
+  .filter { position: relative; padding: 0; text-align: left; white-space: nowrap; transition: color .3s; }
+  .filter span { position: relative; display: inline-block; }
+  .filter span::after { content: ''; position: absolute; left: 0; top: 24px; height: 1px; width: 100%; background: var(--white); transform: scaleX(0); transform-origin: left; transition: transform .4s cubic-bezier(.7,0,.2,1); }
+  .filter[aria-pressed='true'] span::after { transform: scaleX(1); }
+  .head-line { margin-top: 840px; }
+
+  .featured { height: 880px; }
+  .feat-img { margin-top: 60px; height: 600px; overflow: hidden; display: block; }
+  .feat-img :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  :global(.feat-log) { margin-top: 60px; width: 300px; }
+  .feat-title { margin-top: 700px; }
+  .feat-meta { margin-top: 712px; }
+  :global(.feat-btn) { margin-top: 680px; justify-self: end; }
+
+  .list { padding-bottom: 19px; }
+  .lh { margin-top: 20px; }
+  .rows { margin: 60px 20px 0; border-bottom: 1px solid rgba(255,255,255,.25); }
+  .row { display: grid; grid-template-columns: 335fr 20fr 690fr 20fr 335fr; height: 260px; border-top: 1px solid rgba(255,255,255,.25); align-items: start; }
+  .r-no { grid-column: 1; margin-top: 23px; display: flex; flex-direction: column; gap: 11px; }
+  .r-main { grid-column: 3; margin-top: 19px; display: flex; flex-direction: column; gap: 27px; }
+  .r-plate { grid-column: 5; margin-top: 19px; overflow: hidden; aspect-ratio: 335 / 220; }
+  .r-plate :global(img) { width: 100%; height: 100%; object-fit: cover; }
+
+  .more { height: 400px; }
+  :global(.more-btn) { margin-top: 80px; justify-self: center; }
+  .more-text { margin-top: 270px; }
+
+  @media (max-width: 1023.98px) {
+    .header { padding-top: 160px; }
+    :global(.exp-head) :global(h1) { font-size: clamp(48px, 6vw + 24px, 80px); }
+    .exp-intro { max-width: 520px !important; align-self: center !important; }
+    .filters { display: flex; flex-wrap: wrap; gap: 14px 24px; }
+    .fb, .fc { display: contents; }
+    .fb .filter, .fc .filter { width: auto; }
+    .head-line { margin-inline: -20px !important; }
+    .header { padding-bottom: 0; }
+    .featured { padding-top: 40px; }
+    .feat-img { height: auto; aspect-ratio: 1045 / 600; }
+    :global(.feat-btn) { align-self: flex-start !important; }
+    .list { padding-top: 40px; }
+    .lh { display: none; }
+    .rows { margin: 0 !important; }
+    .row { grid-template-columns: 1fr minmax(120px, 36%); height: auto; padding: 20px 0 24px; gap: 16px 20px; }
+    .r-no, .r-main, .r-plate { margin: 0; }
+    .r-no { grid-column: 1; grid-row: 1; }
+    .r-main { grid-column: 1; grid-row: 2; gap: 12px; }
+    .r-plate { grid-column: 2; grid-row: 1 / 3; }
+    .more { padding-block: 60px 80px; align-items: center; }
+    .more:has([data-more][style*='hidden']) :global(.more-btn) { display: none; }
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import Rails from '../components/Rails.astro';
+import FieldLog from '../components/FieldLog.astro';
+
+const sections = [
+  { id: 'who-we-are', t: 'Who we are', b: 'STRATA Architecture AS (“STRATA”, “we”) is an architecture practice with field offices in Oslo, Reykjavík, Vancouver and Santiago. This policy explains how we handle personal information collected through this website and during our commissions.' },
+  { id: 'what-we-collect', t: 'What we collect', b: 'When you contact us, we collect the details you choose to share: your name, email address, organisation and information about a site. We also collect basic, anonymised analytics about how the website is used.' },
+  { id: 'how-we-use-it', t: 'How we use it', b: 'We use your information only to respond to your enquiry, plan a potential commission and keep you informed about a project you are part of. We do not sell personal data, and we do not use it for advertising.' },
+  { id: 'site-locations', t: 'Site locations and field recordings', b: 'Site coordinates, photographs and recordings made during an expedition are treated as confidential client material. We never publish an exact location without written permission, and sensitive ecological data is withheld from public project pages.' },
+  { id: 'sharing', t: 'Sharing', b: 'We share information only with trusted partners who help deliver a commission — such as field scientists, engineers and local guides — and only to the extent they need it. Each partner is bound by confidentiality terms.' },
+  { id: 'your-rights', t: 'Your rights', b: 'You may ask to see, correct or delete the personal information we hold about you at any time. Where the GDPR or equivalent laws apply, you also have the right to object to processing and to lodge a complaint with your local supervisory authority.' },
+  { id: 'contact', t: 'Contact', b: 'Questions about this policy can be sent to <a href="mailto:privacy@strata.studio">privacy@strata.studio</a>. We aim to reply within ten working days.' },
+];
+---
+<Base inner title="Privacy Policy — STRATA" description="How STRATA handles personal information, site locations and field recordings." navLabel="LEGAL" navCoords="LAST UPDATED 01.10.2026">
+  <section class="sec legal" aria-labelledby="l-title">
+    <Rails />
+    <p class="mono l-label col-a">Legal / 01</p>
+    <h1 id="l-title" class="display-l l-title col-b">Privacy <em>Policy</em></h1>
+    <nav class="toc col-a" aria-label="Contents">
+      <p class="mono-sm">CONTENTS</p>
+      <ol>
+        {sections.map((s, i) => <li><a class="mono-sm" href={`#${s.id}`} data-toc={s.id}>{String(i + 1).padStart(2, '0')}&nbsp;&nbsp;{s.t}</a></li>)}
+      </ol>
+    </nav>
+    <div class="content col-b">
+      {sections.map((s, i) => (
+        <section id={s.id} class="part" data-part>
+          <p class="mono-sm">{String(i + 1).padStart(2, '0')}</p>
+          <h2 class="title pt">{s.t}</h2>
+          <p class="body pb" set:html={s.b} />
+        </section>
+      ))}
+    </div>
+    <div class="l-logs col-c">
+      <FieldLog title="Last updated" lines={['01 October 2026']} />
+      <FieldLog title="Questions" lines={[{ text: 'privacy@strata.studio', href: 'mailto:privacy@strata.studio' }]} />
+    </div>
+  </section>
+</Base>
+
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-toc]')];
+  const parts = [...document.querySelectorAll<HTMLElement>('[data-part]')];
+  const setActive = (id: string) => links.forEach((a) => a.toggleAttribute('aria-current', a.dataset.toc === id));
+  setActive(parts[0]?.id ?? '');
+  const io = new IntersectionObserver((entries) => {
+    const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+    if (vis) setActive(vis.target.id);
+  }, { rootMargin: '-20% 0px -60% 0px' });
+  parts.forEach((p) => io.observe(p));
+</script>
+
+<style>
+  .legal { padding-bottom: 200px; }
+  .l-label { margin-top: 264px; }
+  .l-title { margin-top: 240px; }
+  .toc { margin-top: 520px; width: 328px; display: flex; flex-direction: column; gap: 12px; position: sticky; top: 120px; }
+  .toc ol { display: flex; flex-direction: column; gap: 12px; }
+  .toc li { display: flex; }
+  .toc a { white-space: nowrap; transition: color .3s; }
+  .toc a:hover, .toc a[aria-current] { color: var(--white); }
+  .content { margin-top: 520px; display: flex; flex-direction: column; gap: 56px; }
+  .part { display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 120px; }
+  .pt { letter-spacing: -0.04em; }
+  .pb { width: 560px; max-width: 100%; line-height: 1.5; }
+  .pb :global(a) { text-decoration: underline; text-underline-offset: 3px; }
+  .l-logs { margin-top: 520px; display: flex; flex-direction: column; gap: 50px; }
+
+  @media (max-width: 1023.98px) {
+    .legal { padding-top: 160px; padding-bottom: 120px; }
+    .l-title { margin-top: -20px !important; }
+    .toc { position: static; order: 1; }
+    .content { order: 2; }
+    .l-logs { order: 3; flex-direction: row; flex-wrap: wrap; gap: 28px; }
+  }
+</style>

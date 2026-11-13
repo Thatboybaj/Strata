@@ -1,0 +1,54 @@
+number: "031"
+title: "Ember Observatory"
+accent: "Observatory"
+region: "Icelandic Highlands"
+location: "Icelandic Highlands"
+coords: "64°02′N • 19°06′W"
+terrain: "Icelandic Highlands"
+landscape: "Volcanic"
+days: 17
+year: 2024
+firstSketch: "Day 12"
+status: "Built 2024"
+featured: false
+order: 3
+cover: "../../assets/images/ch3-volcanic.jpg"
+plate: "../../assets/images/ch3-volcanic.jpg"
+summary: "A geological observatory on a live volcanic plateau. A vent opened on day nine and changed the entire masterplan."
+site: "The highlands are still being made. Lava fields steam after rain, the ground shifts by centimetres each year, and on day nine a new vent opened four hundred metres from our camp. The brief asked for a permanent observatory. The site asked for something that could be moved."
+siteImage: "../../assets/images/sky.jpg"
+siteLogs:
+  - title: "Client"
+    lines: ["Icelandic geological survey"]
+  - title: "Programme"
+    lines: ["Monitoring lab", "Viewing platform", "Six bunks"]
+  - title: "Area"
+    lines: ["180 m²"]
+journal:
+  - day: "DAY 01"
+    date: "06 AUG 2024 • 9°C"
+    text: "Black sand, white steam, green moss. The ground was warm under our sleeping mats."
+  - day: "DAY 09"
+    date: "14 AUG 2024 • 11°C"
+    text: "A vent opened to the north at 03:40. We moved camp twice before breakfast."
+  - day: "DAY 12"
+    date: "17 AUG 2024 • 8°C"
+    text: "First sketch. Six modules on sledges, each one able to leave on its own. Permanence was never on offer."
+    accent: "Permanence was never on offer."
+  - day: "DAY 17"
+    date: "22 AUG 2024 • 7°C"
+    text: "Agreed the three positions the modules can retreat to. The vent agreed with none of them."
+quote: "“A vent opened on day nine. The masterplan opened with it.”"
+plates:
+  - image: "../../assets/images/ch3-volcanic.jpg"
+    caption: "Plate 01 — The northern vent, day 9"
+  - image: "../../assets/images/ch6-leave-behind.jpg"
+    caption: "Plate 02 — Sledge route survey, day 14"
+numbers:
+  - value: "17 days"
+    label: "On site before the first sketch held"
+  - value: "400 m"
+    label: "Distance from camp to the new vent"
+  - value: "6"
+    label: "Modules, each able to relocate"
+next: "canopy-field-station"

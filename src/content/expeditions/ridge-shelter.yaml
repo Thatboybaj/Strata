@@ -1,0 +1,54 @@
+number: "044"
+title: "Ridge Shelter"
+accent: "Shelter"
+region: "Vatnajökull, Iceland"
+location: "Vatnajökull, Iceland"
+coords: "64°25′N • 16°48′W"
+terrain: "Glacier Ridge"
+landscape: "Volcanic"
+days: 26
+year: 2026
+firstSketch: "Day 20"
+status: "In construction"
+featured: false
+order: 8
+cover: "../../assets/images/ridge-shelter.jpg"
+plate: "../../assets/images/ridge-shelter.jpg"
+summary: "An emergency shelter on a glacier ridge above an active volcanic system, sited by its avalanche and meltwater paths."
+site: "The ridge sits between an ice cap and a caldera. Meltwater floods arrive without warning and the snowpack shifts with every eruption tremor. The brief asked for a shelter for mountain rescue teams. The site asked for one placed where nothing would ever run through it."
+siteImage: "../../assets/images/ch3-polar.jpg"
+siteLogs:
+  - title: "Client"
+    lines: ["Mountain rescue association"]
+  - title: "Programme"
+    lines: ["Shelter for 12", "Radio room", "Equipment store"]
+  - title: "Area"
+    lines: ["95 m²"]
+journal:
+  - day: "DAY 01"
+    date: "08 JUN 2026 • 1°C"
+    text: "White-out on the approach. We found the ridge by following the sound of the meltwater."
+  - day: "DAY 10"
+    date: "17 JUN 2026 • 3°C"
+    text: "Mapped every avalanche and flood path across the ridge. Only one spot was crossed by none."
+  - day: "DAY 20"
+    date: "27 JUN 2026 • 2°C"
+    text: "First sketch. A shelter on the one quiet spot, turned away from the caldera. The ridge chose the site."
+    accent: "The ridge chose the site."
+  - day: "DAY 26"
+    date: "03 JUL 2026 • 4°C"
+    text: "Foundations marked. The rescue teams named the spot before we had a drawing."
+quote: "“Only one place on the ridge was crossed by nothing. That is where we built.”"
+plates:
+  - image: "../../assets/images/ch3-volcanic.jpg"
+    caption: "Plate 01 — The caldera rim, day 4"
+  - image: "../../assets/images/ch3-polar.jpg"
+    caption: "Plate 02 — Flood path map, day 10"
+numbers:
+  - value: "26 days"
+    label: "On the ridge in a single season"
+  - value: "1"
+    label: "Site crossed by no flood or avalanche path"
+  - value: "12"
+    label: "Rescuers the shelter can hold"
+next: "dune-house"

@@ -1,0 +1,213 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Rails from '../components/Rails.astro';
+import CircleButton from '../components/CircleButton.astro';
+import FieldLog from '../components/FieldLog.astro';
+import ChapterHeading from '../components/ChapterHeading.astro';
+import { team, season } from '../data/studio';
+
+import heroImg from '../assets/images/ch4-quiet-maps.jpg';
+import terrain from '../assets/images/quote-terrain.webp';
+import oslo from '../assets/images/ch3-polar.jpg';
+import reykjavik from '../assets/images/ch3-volcanic.jpg';
+import vancouver from '../assets/images/ch1-field-season.jpg';
+import santiago from '../assets/images/ch6-leave-behind.jpg';
+import drawing from '../assets/images/cta-terrain-drawing.webp';
+
+const principles = [
+  { t: 'Arrive Before the <em>Drawing</em>', d: 'No line is drawn until the site has been walked in every light we can find: dawn, dusk, storm and stillness.' },
+  { t: 'Build <em>Less</em>', d: 'The strongest structure is often the smallest one. We remove before we add.' },
+  { t: 'Borrow From the <em>Land</em>', d: 'Local stone, local timber, local knowledge. Materials should be able to find their way home.' },
+  { t: 'Leave It <em>Better</em>', d: 'Every project carries a restoration plan that outlasts the build itself.' },
+];
+const offices = [
+  { name: 'Oslo', img: oslo, coords: '59°54′N • 10°45′E', d: 'Headquarters. Polar and marine commissions across the Nordic and Arctic coasts.', alt: 'Snow mountains above a fjord' },
+  { name: 'Reykjavík', img: reykjavik, coords: '64°08′N • 21°56′W', d: 'Volcanic and highland work, alongside Icelandic geological survey teams.', alt: 'Volcano above a rocky plain' },
+  { name: 'Vancouver', img: vancouver, coords: '49°17′N • 123°07′W', d: 'Temperate rainforest and coastal projects across the Pacific Northwest.', alt: 'Forested hills at sunset' },
+  { name: 'Santiago', img: santiago, coords: '33°27′S • 70°40′W', d: 'High-altitude and desert commissions, from the Andes to the Atacama.', alt: 'Alpine valley with a river' },
+];
+---
+<Base inner title="About — STRATA" description="STRATA is an architecture studio that works outside the studio: architects, landscape scientists and builders in four field offices." navLabel="THE STUDIO" navCoords="59°54′N • 10°45′E">
+  <section class="sec hero" aria-labelledby="about-title">
+    <Image class="layer hero-bg" src={heroImg} alt="" widths={[1440, 2880]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="layer overlay" />
+    <h1 id="about-title" class="display-xl hero-h col-ab">A Studio That Works<br class="d" /> <em>Outside</em> the Studio.</h1>
+    <p class="mono hero-m1 col-a">EST. 2011 — OSLO</p>
+    <p class="mono hero-m2 col-b">FOUR FIELD OFFICES</p>
+    <p class="body hero-intro col-c">We are architects, landscape scientists and builders. We spend more time on site than in the studio, and we design only for places we have walked, measured and listened to.</p>
+  </section>
+
+  <section class="sec position" aria-labelledby="pos-title">
+    <Rails />
+    <p class="lead pos-lead col-b">STRATA was founded on a single refusal: we will not design for a place we have not stood in. Everything else — the drawings, the materials, the buildings — <em>follows from that.</em></p>
+    <p class="body pos-text col-b">We work in the planet’s most demanding environments — polar coasts, deserts, volcanic plateaus, rainforest and high alpine sites. Our clients are research institutes, conservation bodies and private patrons who share one conviction: the site comes first.</p>
+    <FieldLog class="col-c pos-log1" title="Founded" lines={['2011, Oslo', 'Ingrid Solberg & Matías Herrera']} />
+    <FieldLog class="col-c pos-log2" title="Practice" lines={['14 architects', '6 field scientists', '4 field offices']} />
+    <ChapterHeading class="col-a pos-head" label="Chapter I" title="Our <em>Position</em>" />
+  </section>
+
+  <section class="sec principles" aria-labelledby="pr-title">
+    <Rails />
+    <ChapterHeading class="col-b pr-head" size="display" align="center" label="Chapter II" title="Four <em>Principles</em>" />
+    <ol class="rows col-full">
+      {principles.map((p, i) => (
+        <li class="row">
+          <span class="mono t num">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="title rt" set:html={p.t} />
+          <p class="body dim rd">{p.d}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="sec quote-sec" aria-label="Quote">
+    <Rails />
+    <Image class="layer terrain" src={terrain} alt="" widths={[1440, 2880]} sizes="100vw" />
+    <blockquote class="quote q col-full center">“We measure success in what the land keeps.”</blockquote>
+    <p class="body q-text col-a">Our buildings are designed to be outlived — by the trees around them, the rivers below them and the people who come after.</p>
+  </section>
+
+  <section class="sec team" aria-labelledby="team-title">
+    <Rails />
+    <ChapterHeading class="col-a team-head" label="Chapter III" title="The People in the <em>Field</em>" />
+    <p class="body team-text col-b">Architects who carry tents. Scientists who sketch. Builders who know when to wait out a storm. Every expedition team is assembled around the landscape, not the brief.</p>
+    <ul class="quad team-grid col-inner">
+      {team.map((m) => (
+        <li class="member">
+          <div class="portrait"><span class="t mono">PORTRAIT 3:4</span></div>
+          <p class="name">{m.name}</p>
+          <p class="mono-sm">{m.role}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="sec offices" id="offices" aria-labelledby="off-title">
+    <Rails />
+    <ChapterHeading class="col-b off-head" size="display" align="center" label="Chapter IV" title="Four Offices. One <em>Season.</em>" />
+    <ul class="quad off-grid col-inner">
+      {offices.map((o) => (
+        <li class="office">
+          <Image src={o.img} alt={o.alt} widths={[335, 670]} sizes="(max-width: 1023px) 50vw, 24vw" />
+          <h3 class="title on">{o.name}</h3>
+          <p class="mono-sm oc">{o.coords}</p>
+          <p class="body od">{o.d}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="sec season" aria-labelledby="season-title">
+    <Rails />
+    <ChapterHeading class="col-a season-head" label="Chapter V" title="Field Season <em>2026</em>" />
+    <table class="stable col-bc">
+      <thead><tr><th>WINDOW</th><th>LOCATION</th><th>LANDSCAPE</th><th>STATUS</th></tr></thead>
+      <tbody>
+        {season.map((r) => (
+          <tr><td class="mono-sm w">{r.window}</td><td class="h-24">{r.location}</td><td class="mono-sm">{r.landscape}</td><td class="mono-sm w">{r.status}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sec cta" aria-labelledby="cta-title">
+    <Rails />
+    <Image class="layer drawing" src={drawing} alt="" widths={[1440, 2880]} sizes="100vw" />
+    <p class="body cta-text col-c">We take on a small number of commissions each field season. If you have a place that needs listening to, we would like to hear about it.</p>
+    <h2 id="cta-title" class="quote cta-q col-ab">Walk the next site with us.</h2>
+    <CircleButton href="/contact" label="Start a conversation" hoverText="Start a Conversation" class="cta-btn col-bc" />
+    <a class="mono-sm careers col-a" href="mailto:careers@strata.studio">CAREERS — careers@strata.studio</a>
+  </section>
+</Base>
+
+<style>
+  .hero { height: 1024px; }
+  .hero :global(.hero-bg) { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .overlay { inset: 0; background: var(--overlay); }
+  .hero-h { margin-top: 620px; width: 1045px; }
+  .hero-m1, .hero-m2 { margin-top: 968px; white-space: nowrap; }
+  .hero-intro { margin-top: 888px; width: 335px; }
+
+  .position { height: 820px; }
+  .pos-lead { margin-top: 160px; width: 690px; }
+  .pos-text { margin-top: 520px; width: 393px; }
+  :global(.pos-log1) { margin-top: 160px; width: 335px; }
+  :global(.pos-log2) { margin-top: 320px; width: 335px; }
+  :global(.pos-head) { margin-top: 680px; width: 300px; }
+
+  .principles { height: 1040px; }
+  :global(.pr-head) { margin-top: 120px; width: 690px; }
+  .rows { margin-top: 360px; border-bottom: 1px solid rgba(255,255,255,.25); margin-inline: 20px; }
+  .row { display: grid; grid-template-columns: 335fr 20fr 690fr 20fr 335fr; height: 160px; border-top: 1px solid rgba(255,255,255,.25); align-items: start; }
+  .num { grid-column: 1; margin-top: 33px; }
+  .rt { grid-column: 3; margin-top: 29px; letter-spacing: -0.04em; }
+  .rd { grid-column: 5; margin-top: 31px; }
+
+  .quote-sec { height: 1024px; }
+  .quote-sec :global(.terrain) { left: 0; top: 0; width: 100%; height: 1104px; object-fit: cover; }
+  .q { margin-top: 300px; width: 1224px; }
+  .q-text { margin-top: 900px; width: 335px; }
+
+  .team { height: 980px; }
+  :global(.team-head) { margin-top: 120px; width: 300px; }
+  .team-text { margin-top: 120px; width: 393px; }
+  .quad { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .team-grid { margin-top: 340px; }
+  .portrait { aspect-ratio: 335 / 420; background: rgba(255,255,255,.06); position: relative; margin-bottom: 24px; }
+  .portrait span { position: absolute; left: 16px; top: 16px; font-size: 12px; color: var(--white-70); }
+  .member .name { margin-bottom: 7px; }
+
+  .offices { height: 940px; }
+  :global(.off-head) { margin-top: 120px; width: 690px; }
+  .off-grid { margin-top: 400px; }
+  .office :global(img) { width: 100%; aspect-ratio: 335 / 240; height: auto; object-fit: cover; margin-bottom: 28px; }
+  .on { letter-spacing: -0.04em; margin-bottom: 15px; }
+  .oc { margin-bottom: 18px; }
+  .od { width: 300px; max-width: 100%; }
+
+  .season { height: 860px; }
+  :global(.season-head) { margin-top: 120px; width: 300px; }
+  .stable { margin-top: 126px; border-collapse: collapse; width: 100%; table-layout: fixed; }
+  .stable th { font: 400 14px/1.3 var(--mono); color: var(--white-70); text-align: left; padding: 0 0 35px; }
+  .stable th:nth-child(1) { width: 185px; } .stable th:nth-child(2) { width: 320px; } .stable th:nth-child(3) { width: 205px; }
+  .stable tbody tr { border-top: 1px solid rgba(255,255,255,.25); height: 110px; }
+  .stable tbody tr:last-child { border-bottom: 1px solid rgba(255,255,255,.25); }
+  .stable td { vertical-align: top; padding: 40px 0 0; }
+  .stable td.h-24 { padding-top: 34px; padding-right: 20px; }
+  .stable td.w { color: var(--white); }
+
+  .cta { height: 900px; }
+  .cta :global(.drawing) { left: 0; top: 0; width: 100%; height: 1364px; object-fit: cover; opacity: 0.2; }
+  .cta-text { margin-top: 120px; width: 335px; }
+  .cta-q { margin-top: 300px; width: 1045px; }
+  :global(.cta-btn) { margin-top: 560px; margin-left: 440px; }
+  .careers { margin-top: 820px; white-space: nowrap; }
+
+  @media (max-width: 1023.98px) {
+    .hero { min-height: max(100svh, 720px); justify-content: flex-end; padding-bottom: 40px; gap: 20px; }
+    .hero-intro { order: 1; max-width: 420px !important; }
+    .hero-m1 { order: 2; } .hero-m2 { order: 3; margin-top: -8px !important; }
+    :global(.pos-head), :global(.team-head), :global(.season-head) { order: -1; }
+    .pos-text, .team-text { max-width: 560px !important; }
+    .rows { margin-inline: 0 !important; }
+    .row { grid-template-columns: 48px 1fr; height: auto; padding: 24px 0 28px; row-gap: 14px; }
+    .num { grid-column: 1; grid-row: 1; margin-top: 4px; }
+    .rt { grid-column: 2; margin-top: 0; }
+    .rd { grid-column: 2; margin-top: 0; max-width: 420px; }
+    .quote-sec { min-height: 100svh; justify-content: space-between; padding-top: 200px; }
+    .quote-sec :global(.terrain) { height: 100%; }
+    .quad { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+    .stable thead { display: none; }
+    .stable, .stable tbody, .stable tr, .stable td { display: block; width: auto; height: auto; }
+    .stable tbody tr { padding: 20px 0 24px; display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; }
+    .stable td { padding: 0 !important; }
+    .stable td.h-24 { grid-column: 1 / -1; grid-row: 2; }
+    .cta { min-height: 100svh; }
+    .cta :global(.drawing) { height: 100%; }
+    .cta-q { order: 1; } :global(.cta-btn) { order: 2; } .careers { order: 3; white-space: normal; }
+  }
+  @media (max-width: 599.98px) {
+    .quad.off-grid { grid-template-columns: 1fr; }
+  }
+</style>

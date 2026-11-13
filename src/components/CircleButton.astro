@@ -1,13 +1,20 @@
 ---
 /** Circular outline button with the pixel arrow. lg = 250px, sm = 125px. */
 import Arrow from '../assets/arrow-pixel.svg?raw';
-interface Props { href: string; size?: 'lg' | 'sm'; label: string; hoverText?: string; class?: string }
-const { href, size = 'lg', label, hoverText, class: cls = '' } = Astro.props;
+interface Props { href?: string; size?: 'lg' | 'sm'; label: string; hoverText?: string; class?: string; [key: string]: unknown }
+const { href, size = 'lg', label, hoverText, class: cls = '', ...rest } = Astro.props;
 ---
-<a href={href} class:list={['circle-btn', size, cls]} aria-label={label}>
-  <span class="arrow" set:html={Arrow} />
-  {hoverText && <span class="hover-text" aria-hidden="true">{hoverText}</span>}
-</a>
+{href ? (
+  <a href={href} class:list={['circle-btn', size, cls]} aria-label={label} {...rest}>
+    <span class="arrow" set:html={Arrow} />
+    {hoverText && <span class="hover-text" aria-hidden="true">{hoverText}</span>}
+  </a>
+) : (
+  <button type="button" class:list={['circle-btn', size, cls]} aria-label={label} {...rest}>
+    <span class="arrow" set:html={Arrow} />
+    {hoverText && <span class="hover-text" aria-hidden="true">{hoverText}</span>}
+  </button>
+)}
 
 <style>
   .circle-btn {

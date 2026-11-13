@@ -1,0 +1,54 @@
+number: "038"
+title: "Shifting Ground"
+accent: "Ground"
+region: "Namib Desert, Namibia"
+location: "Namib Desert, Namibia"
+coords: "23°34′S • 15°03′E"
+terrain: "Namib Desert"
+landscape: "Desert"
+days: 41
+year: 2025
+firstSketch: "Day 30"
+status: "Built 2025"
+featured: false
+order: 6
+cover: "../../assets/images/sky.jpg"
+plate: "../../assets/images/sky.jpg"
+summary: "A desert research camp where the dunes moved farther than expected — and the building moved with them."
+site: "The site lies on the edge of a dune field that advances toward the coast every year. Our survey showed the ground we were standing on would be under sand within a decade. The brief asked for a fixed camp. The site asked for one that could follow the ground."
+siteImage: "../../assets/images/ch4-quiet-maps.jpg"
+siteLogs:
+  - title: "Client"
+    lines: ["Desert research foundation"]
+  - title: "Programme"
+    lines: ["Field lab", "10 bunks", "Water store"]
+  - title: "Area"
+    lines: ["260 m²"]
+journal:
+  - day: "DAY 01"
+    date: "04 APR 2025 • 33°C"
+    text: "Set up the survey grid at dawn. By evening, three of the pegs were gone."
+  - day: "DAY 14"
+    date: "17 APR 2025 • 30°C"
+    text: "Measured the dune front daily. It moved faster on the days we were not looking."
+  - day: "DAY 30"
+    date: "03 MAY 2025 • 29°C"
+    text: "First sketch. Screw-pile foundations that can be lifted and reset. The camp will follow the ground."
+    accent: "The camp will follow the ground."
+  - day: "DAY 41"
+    date: "14 MAY 2025 • 28°C"
+    text: "Agreed a relocation plan with the foundation: every eight years, one hundred metres east."
+quote: "“The dunes moved farther than expected. The building moved with them.”"
+plates:
+  - image: "../../assets/images/ch4-quiet-maps.jpg"
+    caption: "Plate 01 — Dune front at first light, day 6"
+  - image: "../../assets/images/ch1-field-season.jpg"
+    caption: "Plate 02 — Foundation trial, day 25"
+numbers:
+  - value: "41 days"
+    label: "Spent measuring the dune front"
+  - value: "100 m"
+    label: "Planned relocation every eight years"
+  - value: "24"
+    label: "Screw piles, all recoverable"
+next: "tidewater-lab"

@@ -1,0 +1,136 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Rails from '../components/Rails.astro';
+import CircleButton from '../components/CircleButton.astro';
+import FieldLog from '../components/FieldLog.astro';
+import ChapterHeading from '../components/ChapterHeading.astro';
+import { phases, scope, steps } from '../data/method';
+
+import heroImg from '../assets/images/hero-sky.webp';
+import field from '../assets/images/ch1-field-season.jpg';
+import leave from '../assets/images/ch6-leave-behind.jpg';
+import volcanic from '../assets/images/ch3-volcanic.jpg';
+import drawing from '../assets/images/cta-terrain-drawing.webp';
+const imgs = { field, leave, volcanic } as const;
+const alts = { field: 'Forested hills at sunset', leave: 'Alpine valley with a winding river', volcanic: 'Volcano under cloud above a rocky plain' } as const;
+---
+<Base inner title="Services — The STRATA Method" description="We don’t offer services. We offer a method: five phases from expedition to afterlife." navLabel="THE METHOD" navCoords="FIVE PHASES • ONE SITE">
+  <section class="sec hero" aria-labelledby="svc-title">
+    <Image class="layer hero-bg" src={heroImg} alt="" widths={[1440, 2880]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="layer overlay" />
+    <h1 id="svc-title" class="display-xl hero-h col-ab">We Don’t Offer Services.<br class="d" /> We Offer a <em>Method.</em></h1>
+    <p class="mono hero-m col-a">FROM EXPEDITION</p>
+    <p class="mono hero-m col-b">TO AFTERLIFE</p>
+    <p class="body hero-intro col-c">Every commission follows the same five phases. The landscape changes the details. It never changes the order.</p>
+  </section>
+
+  <section class="sec intro" aria-labelledby="intro-title">
+    <Rails />
+    <ChapterHeading class="col-b intro-head" size="display" align="center" label="Chapter I" title="From Expedition to <em>Afterlife</em>" />
+    <p class="body intro-text col-b center">Most practices begin with a brief. We begin with a field season. The method below is how a site becomes a building — and how a building eventually gives the site back.</p>
+  </section>
+
+  {phases.map((p) => (
+    <section class:list={['sec phase', { 'has-img': p.img }]} aria-label={p.label}>
+      <Rails />
+      <div class="hline ph-line col-inner" />
+      <p class="numeral ph-num col-a" aria-hidden="true">{p.n}</p>
+      <p class="mono ph-label col-b">{p.label}</p>
+      <h2 class="display ph-title col-b" set:html={p.title} />
+      <p class="body ph-text col-b">{p.text}</p>
+      <div class="ph-logs col-c">
+        {p.logs.map(([t, l]) => <FieldLog title={t} lines={[...l]} />)}
+      </div>
+      {p.img && <Image class="ph-img col-bc" src={imgs[p.img]} alt={alts[p.img]} widths={[1045, 2090]} sizes="(max-width: 1023px) 100vw, 73vw" />}
+    </section>
+  ))}
+
+  <section class="sec scope" aria-labelledby="scope-title">
+    <Rails />
+    <ChapterHeading class="col-a scope-head" label="Chapter III" title="What We <em>Take On</em>" />
+    <ul class="scope-list col-bc">
+      {scope.map((s) => <li><span class="h-48 t">{s.t}</span><span class="mono-sm t">{s.n}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="sec how" aria-labelledby="how-title">
+    <Rails />
+    <ChapterHeading class="col-b how-head" size="display" align="center" label="Chapter IV" title="How a Commission <em>Begins</em>" />
+    <ol class="steps col-inner">
+      {steps.map((s) => <li><FieldLog title={s.t} lines={[s.d]} /></li>)}
+    </ol>
+  </section>
+
+  <section class="sec cta" aria-labelledby="cta-title">
+    <Rails />
+    <Image class="layer drawing" src={drawing} alt="" widths={[1440, 2880]} sizes="100vw" />
+    <p class="body cta-text col-c">Field season 2027 windows are open now. We confirm new commissions twice a year, in March and September.</p>
+    <h2 id="cta-title" class="quote cta-q col-ab">Tell us about the place.</h2>
+    <CircleButton href="/contact" label="Start a conversation" hoverText="Start a Conversation" class="cta-btn col-bc" />
+  </section>
+</Base>
+
+<style>
+  .hero { height: 1024px; }
+  .hero :global(.hero-bg) { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .overlay { inset: 0; background: var(--overlay); }
+  .hero-h { margin-top: 620px; width: 1045px; }
+  .hero-m { margin-top: 968px; white-space: nowrap; }
+  .hero-intro { margin-top: 910px; width: 335px; }
+
+  .intro { height: 600px; }
+  :global(.intro-head) { margin-top: 120px; width: 690px; }
+  .intro-text { margin-top: 330px; width: 504px; }
+
+  .phase { height: 520px; }
+  .phase.has-img { height: 900px; }
+  .ph-line { margin-top: 0; }
+  .ph-num { margin-top: 50px; white-space: nowrap; }
+  .ph-label { margin-top: 80px; }
+  .ph-title { margin-top: 120px; width: 690px; }
+  .ph-text { margin-top: 300px; width: 393px; }
+  .ph-logs { margin-top: 80px; width: 335px; display: grid; grid-auto-rows: 120px; align-items: start; }
+  .phase :global(.ph-img) { margin-top: 440px; width: 100%; height: 400px; object-fit: cover; }
+
+  .scope { height: 800px; }
+  :global(.scope-head) { margin-top: 120px; width: 300px; }
+  .scope-list { margin-top: 120px; border-bottom: 1px solid rgba(255,255,255,.25); }
+  .scope-list li { display: grid; grid-template-columns: 690fr 20fr 335fr; height: 110px; border-top: 1px solid rgba(255,255,255,.25); align-items: start; }
+  .scope-list li > :first-child { grid-column: 1; margin-top: 29px; }
+  .scope-list li > :last-child { grid-column: 3; margin-top: 45px; }
+
+  .how { height: 700px; }
+  :global(.how-head) { margin-top: 120px; width: 690px; }
+  .steps { margin-top: 420px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .steps li { width: 300px; max-width: 100%; }
+
+  .cta { height: 900px; }
+  .cta :global(.drawing) { left: 0; top: 0; width: 100%; height: 1364px; object-fit: cover; opacity: 0.2; }
+  .cta-text { margin-top: 120px; width: 335px; }
+  .cta-q { margin-top: 300px; width: 1045px; }
+  :global(.cta-btn) { margin-top: 560px; margin-left: 440px; }
+
+  @media (max-width: 1023.98px) {
+    .hero { min-height: max(100svh, 720px); justify-content: flex-end; padding-bottom: 40px; gap: 20px; }
+    .hero-intro { order: 1; max-width: 420px !important; }
+    .hero-m { order: 2; }
+    .intro-text { max-width: 560px !important; align-self: center !important; }
+    .phase, .phase.has-img { padding-top: 0; gap: 24px; }
+    .ph-line { margin-inline: -20px !important; margin-bottom: 40px !important; }
+    .ph-num { margin-bottom: -8px !important; }
+    .ph-text { max-width: 560px !important; }
+    .ph-logs { display: flex; gap: 28px; flex-wrap: wrap; }
+    .ph-logs > :global(*) { flex: 1 1 200px; }
+    .phase :global(.ph-img) { height: auto; aspect-ratio: 1045 / 400; min-height: 220px; }
+    :global(.scope-head) { order: -1; }
+    .scope-list li { grid-template-columns: 1fr auto; height: auto; padding: 22px 0 24px; gap: 16px; align-items: baseline; }
+    .scope-list li > * { margin: 0 !important; }
+    .scope-list li > :last-child { grid-column: 2; }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
+    .cta { min-height: 100svh; }
+    .cta :global(.drawing) { height: 100%; }
+    .cta-q { order: 1; } :global(.cta-btn) { order: 2; }
+  }
+  @media (max-width: 599.98px) { .steps { grid-template-columns: 1fr; } }
+</style>

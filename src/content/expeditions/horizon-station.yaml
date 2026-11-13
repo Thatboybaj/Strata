@@ -1,0 +1,54 @@
+number: "042"
+title: "Horizon Station"
+accent: "Station"
+region: "Svalbard, Norway"
+location: "Isfjorden, Svalbard"
+coords: "78°13′N • 15°38′E"
+terrain: "Polar Coast"
+landscape: "Polar"
+days: 28
+year: 2025
+firstSketch: "Day 19"
+status: "Built 2025"
+featured: true
+order: 1
+cover: "../../assets/images/ch3-polar.jpg"
+plate: "../../assets/images/ch3-polar.jpg"
+summary: "A research station on the Isfjorden coast, designed after 28 days of observation and built to disappear into the snowline."
+site: "Isfjorden is a coast that rearranges itself every winter. Snow drifts migrate along the ridge, the fjord freezes and thaws, and for 94 days a year the sun never rises. The brief asked for a laboratory, twelve bunks and an observation deck. The site asked for something lower, quieter and lighter than anything built here before."
+siteImage: "../../assets/images/ch3-volcanic.jpg"
+siteLogs:
+  - title: "Client"
+    lines: ["Polar research consortium"]
+  - title: "Programme"
+    lines: ["Laboratory", "12 bunks", "Observation deck"]
+  - title: "Area"
+    lines: ["640 m²"]
+journal:
+  - day: "DAY 01"
+    date: "14 FEB 2024 • −22°C"
+    text: "We arrived in blue light. The sun will not rise for another nine days. We set camp where the wind seemed weakest — by morning, it had found us."
+  - day: "DAY 07"
+    date: "20 FEB 2024 • −18°C"
+    text: "Mapped the snowdrift line along the ridge. Every structure built here in the last century sits on the wrong side of it."
+  - day: "DAY 19"
+    date: "04 MAR 2024 • −15°C"
+    text: "First sketch. A single low line that follows the drift instead of fighting it. Everything after was refinement."
+    accent: "Everything after was refinement."
+  - day: "DAY 28"
+    date: "13 MAR 2024 • −11°C"
+    text: "Final walk. Marked the eleven points where the building will touch the ground. Nowhere else."
+quote: "“The drift told us where to build. We only had to listen long enough.”"
+plates:
+  - image: "../../assets/images/sky.jpg"
+    caption: "Plate 01 — The ridge at 02:00, day 11"
+  - image: "../../assets/images/ch1-field-season.jpg"
+    caption: "Plate 02 — Drift study, day 16"
+numbers:
+  - value: "−22°C"
+    label: "Lowest working temperature on site"
+  - value: "94 days"
+    label: "Without sunrise during construction"
+  - value: "11"
+    label: "Points where the building touches the ground"
+next: "ember-observatory"

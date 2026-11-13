@@ -1,0 +1,172 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Rails from '../components/Rails.astro';
+import FieldLog from '../components/FieldLog.astro';
+import { site } from '../data/site';
+import { landscapes } from '../lib/text';
+import drawing from '../assets/images/cta-terrain-drawing.webp';
+
+const fields = [
+  { n: '01', id: 'name', label: 'NAME', ph: 'Your full name', type: 'text', auto: 'name', req: true },
+  { n: '02', id: 'email', label: 'EMAIL', ph: 'name@organisation.com', type: 'email', auto: 'email', req: true },
+  { n: '03', id: 'organisation', label: 'ORGANISATION', ph: 'Studio, institute or private', type: 'text', auto: 'organization', req: false },
+  { n: '04', id: 'site', label: 'SITE LOCATION', ph: 'Place name or coordinates — e.g. 78°13′N • 15°38′E', type: 'text', auto: 'off', req: false },
+];
+const timelines = ['Next field season', 'Within two years', 'Just exploring'];
+---
+<Base inner title="Contact — Begin an Expedition — STRATA" description="Tell us about the place, not the building. We read every message ourselves and reply within two weeks." navLabel="CONTACT" navCoords="FOUR FIELD OFFICES">
+  <section class="sec contact" aria-labelledby="c-title">
+    <Rails />
+    <Image class="layer drawing" src={drawing} alt="" widths={[1440, 2880]} sizes="100vw" />
+    <h1 id="c-title" class="display-l c-title col-ab">Begin an <em>Expedition.</em></h1>
+    <p class="body c-intro col-b">Tell us about the place, not the building. We read every message ourselves and reply within two weeks.</p>
+    <div class="c-entry col-a">
+      <p class="name">Field Log — New Entry</p>
+      <p class="mono-sm">ENTRY 001 / 2026</p>
+    </div>
+
+    <form class="c-form col-b" action={site.formAction || undefined} method="post" data-form data-mailto={site.email} novalidate>
+      {fields.map((f) => (
+        <div class="field">
+          <label class="mono-sm" for={f.id}>{f.n} — {f.label}</label>
+          <input class="h-24 input" id={f.id} name={f.id} type={f.type} placeholder={f.ph} autocomplete={f.auto} required={f.req} />
+        </div>
+      ))}
+      <fieldset class="field chips-field">
+        <legend class="mono-sm">05 — LANDSCAPE</legend>
+        <div class="chips">
+          {[...landscapes, 'Not sure yet'].map((l, i) => (
+            <label class="chip"><input type="radio" name="landscape" value={l} checked={i === 0} /><span class="mono-sm t">{l}</span></label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset class="field chips-field tl">
+        <legend class="mono-sm">06 — TIMELINE</legend>
+        <div class="chips">
+          {timelines.map((l, i) => (
+            <label class="chip"><input type="radio" name="timeline" value={l} checked={i === 0} /><span class="mono-sm t">{l}</span></label>
+          ))}
+        </div>
+      </fieldset>
+      <div class="field area">
+        <label class="mono-sm" for="message">07 — TELL US ABOUT THE PLACE</label>
+        <textarea id="message" name="message" placeholder="What does the wind do there? Who knows the land best? What should we not disturb?" required></textarea>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="circle-btn send" aria-label="Send entry">
+          <span class="send-text">Send Entry</span>
+          <svg class="arrow" viewBox="0 0 205 205" aria-hidden="true"><path d="M158.682 63.3489L153.269 66.4739L150.144 61.0612L144.732 64.1862L141.607 58.7736L136.194 61.8986L133.069 56.4859L127.656 59.6109L124.531 54.1983L119.119 57.3233L115.994 51.9106L110.581 55.0356L107.456 49.623L102.043 52.748L98.9185 47.3353L93.5058 50.4603L90.3808 45.0476L84.9682 48.1726L81.8432 42.76L76.4305 45.885L73.3055 40.4723L68.7589 43.0973L71.8839 48.51L66.4712 51.635L69.5962 57.0476L64.1836 60.1726L66.8086 64.7193L72.2212 61.5943L75.3462 67.0069L80.7589 63.8819L83.8839 69.2946L89.2965 66.1696L92.4215 71.5822L97.8342 68.4572L100.959 73.8699L106.372 70.7449L109.497 76.1576L114.91 73.0326L118.535 79.3112L37.3446 126.186L49.3446 146.971L130.535 100.096L134.16 106.375L128.747 109.5L131.872 114.912L126.459 118.037L129.584 123.45L124.172 126.575L127.297 131.988L121.884 135.113L125.009 140.525L119.596 143.65L122.721 149.063L117.309 152.188L119.934 156.734L125.346 153.609L128.471 159.022L133.884 155.897L137.009 161.31L141.556 158.685L138.431 153.272L143.843 150.147L140.718 144.734L146.131 141.609L143.006 136.197L148.418 133.072L145.293 127.659L150.706 124.534L147.581 119.121L152.994 115.996L149.869 110.584L155.281 107.459L152.156 102.046L157.569 98.9212L154.444 93.5085L159.857 90.3835L156.732 84.9709L162.144 81.8459L159.019 76.4332L164.432 73.3082L158.682 63.3489Z" fill="none" stroke="currentColor" vector-effect="non-scaling-stroke" /></svg>
+        </button>
+        <p class="note">By sending, you agree to our <a href="/privacy">privacy policy</a>. We never share site locations.</p>
+      </div>
+      <p class="mono-sm status" role="status" aria-live="polite" data-status></p>
+    </form>
+
+    <div class="c-logs col-c">
+      <FieldLog class="cl cl1" title="General" lines={[{ text: site.email, href: `mailto:${site.email}` }, { text: site.phone, href: `tel:${site.phone.replace(/\s/g, '')}` }]} />
+      <FieldLog class="cl cl2" title="Press" lines={[{ text: 'press@strata.studio', href: 'mailto:press@strata.studio' }]} />
+      <FieldLog class="cl cl3" title="Careers" lines={[{ text: 'careers@strata.studio', href: 'mailto:careers@strata.studio' }]} />
+      <div class="hline cl-line" />
+      <FieldLog class="cl cl4" title="Oslo — HQ" lines={['Kirkegata 15', '0153 Oslo, Norway']} />
+      <FieldLog class="cl cl5" title="Reykjavík" lines={['Laugavegur 31', '101 Reykjavík, Iceland']} />
+      <FieldLog class="cl cl6" title="Vancouver" lines={['220 Cambie Street', 'Vancouver, BC, Canada']} />
+      <FieldLog class="cl cl7" title="Santiago" lines={['Av. Italia 1100', 'Providencia, Santiago, Chile']} />
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-form]');
+  const status = form?.querySelector<HTMLElement>('[data-status]');
+  form?.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    if (!form || !status) return;
+    if (!form.checkValidity()) {
+      const bad = form.querySelector<HTMLInputElement>(':invalid');
+      status.textContent = 'Please add your name, a valid email and a few words about the place.';
+      bad?.focus();
+      return;
+    }
+    const data = new FormData(form);
+    if (form.getAttribute('action')) {
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        status.textContent = 'Entry received. We reply to every message within two weeks.';
+      } catch {
+        status.textContent = 'Something went wrong. Please email us directly.';
+      }
+      return;
+    }
+    const body = [...data.entries()].map(([k, v]) => `${k}: ${v}`).join('\n');
+    const subject = `New expedition — ${data.get('site') || data.get('name')}`;
+    location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    status.textContent = 'Opening your email app…';
+  });
+</script>
+
+<style>
+  .contact { height: 1900px; }
+  .contact :global(.drawing) { left: 0; top: 536px; width: 100%; height: 1364px; object-fit: cover; opacity: 0.2; }
+  .c-title { margin-top: 200px; width: 897px; }
+  .c-intro { margin-top: 370px; width: 393px; }
+  .c-entry { margin-top: 560px; display: flex; flex-direction: column; gap: 7px; }
+
+  .c-form { margin-top: 560px; width: 690px; display: flex; flex-direction: column; }
+  .field { display: flex; flex-direction: column; border: 0; margin: 0; padding: 0; min-width: 0; }
+  .field + .field { margin-top: 29px; }
+  .field > label, legend { padding: 0; margin-bottom: 16px; }
+  .input {
+    background: none; border: 0; border-bottom: 1px solid rgba(255,255,255,.25); border-radius: 0;
+    color: var(--white); padding: 0 0 15px; width: 100%; outline: none; font-weight: 300; line-height: 1.3;
+    transition: border-color .3s;
+  }
+  .input::placeholder, textarea::placeholder { color: rgba(255,255,255,.4); opacity: 1; }
+  .input:focus { border-bottom-color: var(--white); }
+  .chips-field { margin-top: 29px !important; }
+  .chips-field legend { margin-bottom: 22px; }
+  .tl { margin-top: 2px !important; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chip span { display: block; padding: 8px 16px; border: 0.5px solid var(--white); border-radius: 100px; color: var(--white); transition: background .3s, color .3s; }
+  .chip input:checked + span { background: var(--white); color: var(--dark); }
+  .chip input:focus-visible + span { outline: 1px solid var(--white); outline-offset: 3px; }
+  .area { margin-top: 45px !important; }
+  .area > label { margin-bottom: 22px; }
+  textarea {
+    height: 200px; resize: vertical; background: none; color: var(--white); border: 0.5px solid var(--white); border-radius: 0;
+    padding: 24px; font: 300 18px/1.3 var(--sans); letter-spacing: -0.01em; outline: none;
+  }
+  textarea:focus { border-color: var(--white); box-shadow: inset 0 0 0 0.5px var(--white); }
+  .submit-row { margin-top: 50px; display: flex; align-items: flex-end; gap: 50px; }
+  .send { width: 250px; height: 250px; border: 3px solid var(--white); border-radius: 50%; position: relative; overflow: hidden; flex-shrink: 0; }
+  .send .arrow { position: absolute; left: calc(50% + 0.55px); top: calc(50% + 0.55px); width: 204.904px; height: 204.904px; translate: -50% -50%; }
+  .send-text { position: absolute; left: 50%; top: 50%; translate: -50% -50%; white-space: nowrap; color: var(--dark); opacity: 0; }
+  .note { font: 400 12px/1.3 var(--mono); color: var(--white-70); width: 300px; margin-bottom: 8px; }
+  .note a { text-decoration: underline; text-underline-offset: 2px; }
+  .status { margin-top: 20px; min-height: 18px; }
+
+  .c-logs { margin-top: 560px; position: relative; height: 840px; }
+  .c-logs :global(.cl) { position: absolute; left: 0; width: 335px; }
+  .c-logs :global(.cl1) { top: 0; } .c-logs :global(.cl2) { top: 130px; } .c-logs :global(.cl3) { top: 240px; }
+  .cl-line { position: absolute; top: 360px; left: 0; width: 335px; }
+  .c-logs :global(.cl4) { top: 400px; } .c-logs :global(.cl5) { top: 520px; } .c-logs :global(.cl6) { top: 640px; } .c-logs :global(.cl7) { top: 760px; }
+
+  @media (max-width: 1023.98px) {
+    .contact { padding-top: 160px; }
+    .contact :global(.drawing) { top: 30%; height: 70%; }
+    .c-intro { max-width: 480px !important; }
+    .c-entry { margin-top: 20px !important; }
+    .tl { margin-top: 29px !important; }
+    .submit-row { flex-wrap: wrap; gap: 24px; }
+    .send { zoom: 0.56; }
+    .c-logs { height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; margin-top: 40px !important; }
+    .c-logs :global(.cl) { position: static; width: auto; }
+    .cl-line { position: static; width: auto; grid-column: 1 / -1; }
+  }
+  @media (max-width: 599.98px) { .c-logs { grid-template-columns: 1fr; } }
+</style>

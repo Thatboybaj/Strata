@@ -1,0 +1,54 @@
+number: "018"
+title: "Dune House"
+accent: "House"
+region: "Namib Desert, Namibia"
+location: "Namib Desert, Namibia"
+coords: "24°43′S • 15°17′E"
+terrain: "Namib Desert"
+landscape: "Desert"
+days: 41
+year: 2024
+firstSketch: "Day 33"
+status: "Built 2024"
+featured: false
+order: 2
+cover: "../../assets/images/ch4-quiet-maps.jpg"
+plate: "../../assets/images/ch4-quiet-maps.jpg"
+summary: "A private retreat in the Namib, shaped by 41 days of watching the dunes move and built to move with them."
+site: "The Namib redraws itself every season. Dunes travel metres a year, fog arrives from the Atlantic before dawn and is gone by nine. The brief asked for a house for four. The site asked for shade, a way to harvest the fog, and a footprint the sand could reclaim."
+siteImage: "../../assets/images/ch6-leave-behind.jpg"
+siteLogs:
+  - title: "Client"
+    lines: ["Private patron"]
+  - title: "Programme"
+    lines: ["Four bedrooms", "Fog-harvesting court", "Star terrace"]
+  - title: "Area"
+    lines: ["310 m²"]
+journal:
+  - day: "DAY 01"
+    date: "02 MAY 2024 • 31°C"
+    text: "The wind erased our tracks before we reached camp. We stopped marking paths after that."
+  - day: "DAY 12"
+    date: "13 MAY 2024 • 29°C"
+    text: "Fog nets up at 04:00. By sunrise each had collected a little over a litre."
+  - day: "DAY 33"
+    date: "03 JUN 2024 • 27°C"
+    text: "First sketch. A house set in the lee of the dune, half buried, breathing through the fog. The rest followed the shade."
+    accent: "The rest followed the shade."
+  - day: "DAY 41"
+    date: "11 JUN 2024 • 26°C"
+    text: "The dune moved 1.4 metres while we were here. The house will move its entrance with it."
+quote: "“The dune moved while we were drawing. So the house learned to move too.”"
+plates:
+  - image: "../../assets/images/ch3-polar.jpg"
+    caption: "Plate 01 — Fog over the lee slope, day 12"
+  - image: "../../assets/images/ch1-field-season.jpg"
+    caption: "Plate 02 — Shade study, day 27"
+numbers:
+  - value: "41 days"
+    label: "On site before construction"
+  - value: "1.4 m"
+    label: "Dune migration recorded during the expedition"
+  - value: "900 L"
+    label: "Fog water harvested per month"
+next: "horizon-station"
